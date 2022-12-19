@@ -13,6 +13,7 @@
 		65042998295017630020A427 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65042997295017630020A427 /* Assets.xcassets */; };
 		6504299B295017630020A427 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65042999295017630020A427 /* LaunchScreen.storyboard */; };
 		AE1B37DB29506CD800D2E902 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AE1B37DA29506CD800D2E902 /* .gitignore */; };
+		AE1B37DE29506E4600D2E902 /* GreetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1B37DD29506E4600D2E902 /* GreetModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		6504299A295017630020A427 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6504299C295017630020A427 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE1B37DA29506CD800D2E902 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		AE1B37DD29506E4600D2E902 /* GreetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreetModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				650429A329501A120020A427 /* Application */,
 				650429A429501A1D0020A427 /* Controller */,
+				AE1B37DC29506E3A00D2E902 /* Model */,
 				650429A229501A0C0020A427 /* Resources */,
 			);
 			path = UIKitHW;
@@ -89,6 +92,14 @@
 				65042992295017600020A427 /* ViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		AE1B37DC29506E3A00D2E902 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AE1B37DD29506E4600D2E902 /* GreetModel.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -165,6 +176,7 @@
 				65042993295017600020A427 /* ViewController.swift in Sources */,
 				6504298F295017600020A427 /* AppDelegate.swift in Sources */,
 				65042991295017600020A427 /* SceneDelegate.swift in Sources */,
+				AE1B37DE29506E4600D2E902 /* GreetModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
