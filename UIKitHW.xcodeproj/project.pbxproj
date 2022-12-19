@@ -12,6 +12,8 @@
 		65042993295017600020A427 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65042992295017600020A427 /* ViewController.swift */; };
 		65042998295017630020A427 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65042997295017630020A427 /* Assets.xcassets */; };
 		6504299B295017630020A427 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65042999295017630020A427 /* LaunchScreen.storyboard */; };
+		650429A729501E320020A427 /* CalculatorService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650429A629501E320020A427 /* CalculatorService.swift */; };
+		650429A929501E4A0020A427 /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650429A829501E4A0020A427 /* GameService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		65042997295017630020A427 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6504299A295017630020A427 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6504299C295017630020A427 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		650429A629501E320020A427 /* CalculatorService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorService.swift; sourceTree = "<group>"; };
+		650429A829501E4A0020A427 /* GameService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,7 @@
 		6504298D295017600020A427 /* UIKitHW */ = {
 			isa = PBXGroup;
 			children = (
+				650429A529501E200020A427 /* Services */,
 				650429A329501A120020A427 /* Application */,
 				650429A429501A1D0020A427 /* Controller */,
 				650429A229501A0C0020A427 /* Resources */,
@@ -86,6 +91,15 @@
 				65042992295017600020A427 /* ViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		650429A529501E200020A427 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				650429A629501E320020A427 /* CalculatorService.swift */,
+				650429A829501E4A0020A427 /* GameService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +173,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				65042993295017600020A427 /* ViewController.swift in Sources */,
+				650429A729501E320020A427 /* CalculatorService.swift in Sources */,
+				650429A929501E4A0020A427 /* GameService.swift in Sources */,
 				6504298F295017600020A427 /* AppDelegate.swift in Sources */,
 				65042991295017600020A427 /* SceneDelegate.swift in Sources */,
 			);
