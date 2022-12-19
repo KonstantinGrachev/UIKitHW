@@ -161,7 +161,8 @@ final class SignInViewController: UIViewController {
     }
     
     @objc private func signInButtonTapped() {
-        print("signInButtonTapped")
+        let guestProfileViewController = GuestProfileViewController()
+        navigationController?.pushViewController(guestProfileViewController, animated: true)
     }
 }
 
@@ -203,5 +204,3 @@ extension SignInViewController {
         ])
     }
 }
-
-
