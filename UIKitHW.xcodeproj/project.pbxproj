@@ -12,6 +12,7 @@
 		65042993295017600020A427 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65042992295017600020A427 /* ViewController.swift */; };
 		65042998295017630020A427 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65042997295017630020A427 /* Assets.xcassets */; };
 		6504299B295017630020A427 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65042999295017630020A427 /* LaunchScreen.storyboard */; };
+		AE1B37DB29506CD800D2E902 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AE1B37DA29506CD800D2E902 /* .gitignore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		65042997295017630020A427 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6504299A295017630020A427 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6504299C295017630020A427 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AE1B37DA29506CD800D2E902 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				650429A329501A120020A427 /* Application */,
 				650429A429501A1D0020A427 /* Controller */,
 				650429A229501A0C0020A427 /* Resources */,
+				AE1B37DA29506CD800D2E902 /* .gitignore */,
 			);
 			path = UIKitHW;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6504299B295017630020A427 /* LaunchScreen.storyboard in Resources */,
+				AE1B37DB29506CD800D2E902 /* .gitignore in Resources */,
 				65042998295017630020A427 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
