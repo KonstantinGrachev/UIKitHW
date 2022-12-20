@@ -184,8 +184,8 @@ final class SignInViewController: UIViewController {
     }
     
     @objc private func signInButtonTapped() {
-//        let guestProfileViewController = GuestProfileViewController()
-//        navigationController?.pushViewController(guestProfileViewController, animated: true)
+        let birthdayListViewController = BirthdayListViewController()
+        navigationController?.pushViewController(birthdayListViewController, animated: true)
     }
     
     @objc private func secureButtonTapped() {
