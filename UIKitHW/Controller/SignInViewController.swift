@@ -63,7 +63,7 @@ final class SignInViewController: UIViewController {
     private let emailSubHeaderLabel: UILabel = {
         let label = UILabel()
         label.text = "Email"
-        label.textColor = .red
+        label.textColor = Constants.Colors.specialBlueColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -95,7 +95,7 @@ final class SignInViewController: UIViewController {
     private let passwordSubHeaderLabel: UILabel = {
         let label = UILabel()
         label.text = "Password"
-        label.textColor = .red
+        label.textColor = Constants.Colors.specialBlueColor
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
