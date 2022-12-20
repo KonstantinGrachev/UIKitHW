@@ -205,7 +205,8 @@ final class BirthdayListViewController: UIViewController {
     
     @objc private func showProfileButtonTapped() {
         let userProfileViewController = UserProfileViewController()
-        navigationController?.pushViewController(userProfileViewController, animated: true)
+        present(userProfileViewController, animated: true)
+
     }
 }
 
