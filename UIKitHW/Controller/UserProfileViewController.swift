@@ -68,9 +68,10 @@ final class UserProfileViewController: UIViewController {
         return label
     }()
     
-    private let nameTextField: UITextField = {
+    private lazy var nameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter name"
+        textField.delegate = self
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .none
         return textField
@@ -102,10 +103,10 @@ final class UserProfileViewController: UIViewController {
         return label
     }()
     
-    private let dateTextField: UITextField = {
+    private lazy var dateTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter date"
-//        textField.inputView =
+        textField.inputView = datePicker
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .none
         return textField
@@ -137,10 +138,10 @@ final class UserProfileViewController: UIViewController {
         return label
     }()
     
-    private let ageTextField: UITextField = {
+    private lazy var ageTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Select age"
-//        textField.inputView =
+        textField.inputView = agePickerView
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .none
         return textField
@@ -172,10 +173,10 @@ final class UserProfileViewController: UIViewController {
         return label
     }()
     
-    private let sexTextField: UITextField = {
+    private lazy var sexTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Select sex"
-//        textField.inputView =
+        textField.inputView = sexPickerView
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .none
         return textField
@@ -247,6 +248,32 @@ final class UserProfileViewController: UIViewController {
         return stackView
     }()
     
+    private lazy var datePicker: UIDatePicker = {
+        let datePicker = UIDatePicker()
+        datePicker.datePickerMode = .date
+        datePicker.preferredDatePickerStyle = .wheels
+        datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+        return datePicker
+    }()
+    
+    private lazy var agePickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        return pickerView
+    }()
+    
+    private lazy var sexPickerView: UIPickerView = {
+        let pickerView = UIPickerView()
+        pickerView.delegate = self
+        pickerView.dataSource = self
+        return pickerView
+    }()
+    
+    //MARK: private properties
+    private var sexArray = ["Male", "Female"]
+    private var ageArray = (1...100).map(String.init)
+    
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -273,7 +300,18 @@ final class UserProfileViewController: UIViewController {
         showInstAlert()
     }
     
+    @objc private func datePickerValueChanged() {
+        getDate()
+    }
+    
     //MARK: flow funcs
+    private func getDate() {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
+        let date = datePicker.date
+        
+        dateTextField.text = dateFormatter.string(from: date)
+    }
     private func showImagePicker() {
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
@@ -299,6 +337,17 @@ final class UserProfileViewController: UIViewController {
     }
 }
 
+// MARK: - UITextFieldDelegate
+extension UserProfileViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        hideKeyboard()
+        return true
+    }
+    func hideKeyboard() {
+        view.endEditing(true)
+    }
+}
+
 // MARK: - UIImagePickerControllerDelegate & UINavigationControllerDelegate
 extension UserProfileViewController: UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -311,6 +360,42 @@ extension UserProfileViewController: UIImagePickerControllerDelegate & UINavigat
             userAvatarImageView.image = chosenImage
             picker.dismiss(animated: true)
         }
+}
+
+extension UserProfileViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        if pickerView == sexPickerView {
+            return sexArray.count
+        } else if pickerView == agePickerView {
+            return ageArray.count
+        } else {
+            return 0
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        if pickerView == sexPickerView {
+            return sexArray[row]
+        } else if pickerView == agePickerView {
+            return ageArray[row]
+        } else {
+            return nil
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView == agePickerView {
+            ageTextField.text = ageArray[row]
+            ageTextField.resignFirstResponder()
+        } else if pickerView == sexPickerView {
+            sexTextField.text = sexArray[row]
+            sexTextField.resignFirstResponder()
+        }
+    }
 }
 
 // MARK: - setupView, setConstraints
