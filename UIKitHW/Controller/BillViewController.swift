@@ -26,6 +26,8 @@ final class BillViewController: UIViewController {
             static let totalLabelBottomAnchor: CGFloat = 50
             static let totalLabelHeightAnchor: CGFloat = 70
             static let totalLabelWidthAnchor: CGFloat = 200
+            
+            static let guestProfileTextViewHeightAnchor: CGFloat = 150
         }
         
         enum Fonts {
@@ -36,6 +38,23 @@ final class BillViewController: UIViewController {
     }
     
     //MARK: UI
+    private lazy var guestProfileTextView: UITextView = {
+        let textView = UITextView()
+        guard let guestName = guestName,
+              let guestsNumber = guestsNumber,
+              let tableNumber = tableNumber else { return textView }
+        textView.text = """
+Name: \(guestName)
+Number of guests: \(guestsNumber)
+Table number: \(tableNumber)
+"""
+        textView.isEditable = false
+        textView.textAlignment = .natural
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.layer.cornerRadius = Constants.Constraints.cornerRadius
+        return textView
+    }()
+    
     private let firstHeaderLabel: UILabel = {
         let label = UILabel()
         label.text = "Caesar salad"
@@ -170,6 +189,12 @@ final class BillViewController: UIViewController {
         return label
     }()
     
+    //MARK: internal properties
+    
+    var guestName: String?
+    var tableNumber: String?
+    var guestsNumber: String?
+    
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -188,13 +213,22 @@ extension BillViewController {
     private func setupView() {
         navigationItem.title = "Bill"
         view.backgroundColor = .secondarySystemBackground
+        view.addSubview(guestProfileTextView)
         view.addSubview(generalStackView)
         view.addSubview(totalLabel)
     }
     
     private func setConstraints() {
+        
         NSLayoutConstraint.activate([
-            generalStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            guestProfileTextView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            guestProfileTextView.leadingAnchor.constraint(equalTo: generalStackView.leadingAnchor),
+            guestProfileTextView.trailingAnchor.constraint(equalTo: generalStackView.trailingAnchor),
+            guestProfileTextView.heightAnchor.constraint(equalToConstant: Constants.Constraints.guestProfileTextViewHeightAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            generalStackView.topAnchor.constraint(equalTo: guestProfileTextView.bottomAnchor),
             generalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Constraints.generalStackViewSideAnchor),
             generalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Constraints.generalStackViewSideAnchor)
         ])

@@ -269,17 +269,24 @@ final class GuestProfileViewController: UIViewController {
         
         return false
     }
-
-    //MARK: @objc funcs
-    @objc private func billButtonTapped() {
+    
+    private func pushBillScreen() {
         if !isTextFieldsEmpty() {
             showAlert(title: "Bill", message: "Bill for the table?") { [weak self] _ in
                 let billViewController = BillViewController()
+                billViewController.guestName = self?.guestNameTextField.text?.capitalized
+                billViewController.guestsNumber = self?.guestsNumberTextField.text
+                billViewController.tableNumber = self?.tableNumberTextField.text
                 self?.navigationController?.pushViewController(billViewController, animated: true)
             }
         } else {
             showAlert(title: "Error", message: "Fill in all the fields")
         }
+    }
+
+    //MARK: @objc funcs
+    @objc private func billButtonTapped() {
+        pushBillScreen()
     }
     
     
