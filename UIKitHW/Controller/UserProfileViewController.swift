@@ -11,13 +11,8 @@ final class UserProfileViewController: UIViewController {
     
     //MARK: Constants
     enum Constants {
-        enum Colors {
-            static let subheaderColor: UIColor = #colorLiteral(red: 0.1764705926, green: 0.4980392158, blue: 0.7568627596, alpha: 1)
-            static let divisionViewColor: UIColor = .systemGray3
-        }
         
         enum Constraints {
-            static let stackViewSpacing: CGFloat = 10
             static let generalStackViewSpacing: CGFloat = 30
             static let userAvatarImageViewSize: CGFloat = 100
             static let generalStackViewSideAnchor: CGFloat = 20
@@ -68,189 +63,26 @@ final class UserProfileViewController: UIViewController {
         return button
     }()
     
-    private let nameSubHeaderLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Name"
-        label.textColor = Constants.Colors.subheaderColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private lazy var nameItem = ProfileItemView(delegate: self, headerText: "Name", placeholder: "Enter name", inputView: .init())
     
-    private lazy var nameTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Enter name"
-        textField.delegate = self
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = .none
-        return textField
-    }()
-    
-    private let nameDivisionView: UIView = {
-        let view = UIView()
-        view.backgroundColor = Constants.Colors.divisionViewColor
-        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var nameStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [nameSubHeaderLabel,
-                                                       nameTextField,
-                                                       nameDivisionView])
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = Constants.Constraints.stackViewSpacing
-        return stackView
-    }()
-    
-    private let dateSubHeaderLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Date"
-        label.textColor = Constants.Colors.subheaderColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var dateTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Enter date"
-        textField.inputView = datePicker
+    private lazy var dateItem: ProfileItemView = {
         let toolbar = UIToolbar().ToolbarPiker(mySelect: #selector(dismissDatePicker))
-        textField.inputAccessoryView = toolbar
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = .none
-        return textField
+        let item = ProfileItemView(delegate: self, headerText: "Date", placeholder: "Enter date", inputView: datePicker, inputAccessoryView: toolbar)
+        return item
     }()
     
-    private let dateDivisionView: UIView = {
-        let view = UIView()
-        view.backgroundColor = Constants.Colors.divisionViewColor
-        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private lazy var ageItem = ProfileItemView(delegate: self, headerText: "Age", placeholder: "Select age", inputView: agePickerView)
     
-    private lazy var dateStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [dateSubHeaderLabel,
-                                                       dateTextField,
-                                                       dateDivisionView])
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = Constants.Constraints.stackViewSpacing
-        return stackView
-    }()
+    private lazy var sexItem = ProfileItemView(delegate: self, headerText: "Sex", placeholder: "Select sex", inputView: sexPickerView)
     
-    private let ageSubHeaderLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Age"
-        label.textColor = Constants.Colors.subheaderColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var ageTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Select age"
-        textField.inputView = agePickerView
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = .none
-        return textField
-    }()
-    
-    private let ageDivisionView: UIView = {
-        let view = UIView()
-        view.backgroundColor = Constants.Colors.divisionViewColor
-        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var ageStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [ageSubHeaderLabel,
-                                                       ageTextField,
-                                                       ageDivisionView])
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = Constants.Constraints.stackViewSpacing
-        return stackView
-    }()
-    
-    private let sexSubHeaderLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Sex"
-        label.textColor = Constants.Colors.subheaderColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var sexTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Select sex"
-        textField.inputView = sexPickerView
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = .none
-        return textField
-    }()
-    
-    private let sexDivisionView: UIView = {
-        let view = UIView()
-        view.backgroundColor = Constants.Colors.divisionViewColor
-        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var sexStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [sexSubHeaderLabel,
-                                                       sexTextField,
-                                                       sexDivisionView])
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = Constants.Constraints.stackViewSpacing
-        return stackView
-    }()
-    
-    private let instagramSubHeaderLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Instagram"
-        label.textColor = Constants.Colors.subheaderColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var instagramTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Enter instagram"
-        textField.addTarget(self, action: #selector(instagramTextFieldTapped), for: .touchDown)
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.borderStyle = .none
-        return textField
-    }()
-    
-    private let instagramDivisionView: UIView = {
-        let view = UIView()
-        view.backgroundColor = Constants.Colors.divisionViewColor
-        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var instagramStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [instagramSubHeaderLabel,
-                                                       instagramTextField,
-                                                       instagramDivisionView])
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = Constants.Constraints.stackViewSpacing
-        return stackView
-    }()
+    private lazy var instagramItem = ProfileItemView(target: self, selector: #selector(instagramTextFieldTapped), headerText: "Instagram", placeholder: "Enter instagram")
     
     private lazy var generalStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [nameStackView,
-                                                       dateStackView,
-                                                       ageStackView,
-                                                       sexStackView,
-                                                       instagramStackView
+        let stackView = UIStackView(arrangedSubviews: [nameItem,
+                                                       dateItem,
+                                                       ageItem,
+                                                       sexItem,
+                                                       instagramItem
                                                       ])
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -323,7 +155,7 @@ final class UserProfileViewController: UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
         let date = datePicker.date
-        dateTextField.text = dateFormatter.string(from: date)
+        dateItem.configure(with: dateFormatter.string(from: date))
     }
     
     private func showImagePicker() {
@@ -341,7 +173,7 @@ final class UserProfileViewController: UIViewController {
         }
         let ok = UIAlertAction(title: "OK", style: .default) { [weak self] action in
             guard let username = alert.textFields?.first?.text else { return }
-            self?.instagramTextField.text = username
+            self?.instagramItem.configure(with: username)
         }
         let cancel = UIAlertAction(title: "Cancel", style: .cancel)
         alert.addAction(ok)
@@ -403,11 +235,11 @@ extension UserProfileViewController: UIPickerViewDelegate, UIPickerViewDataSourc
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == agePickerView {
-            ageTextField.text = ageArray[row]
-            ageTextField.resignFirstResponder()
+            ageItem.configure(with: ageArray[row])
+            view.endEditing(true)
         } else if pickerView == sexPickerView {
-            sexTextField.text = sexArray[row]
-            sexTextField.resignFirstResponder()
+            sexItem.configure(with: sexArray[row])
+            view.endEditing(true)
         }
     }
 }
@@ -426,8 +258,8 @@ extension UserProfileViewController {
     private func setConstraints() {
         NSLayoutConstraint.activate([
             generalStackView.topAnchor.constraint(equalTo: changeAvatarButton.bottomAnchor),
-            generalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Constraints.generalStackViewSideAnchor),
-            generalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Constraints.generalStackViewSideAnchor)
+            generalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            generalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([

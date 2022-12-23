@@ -17,6 +17,7 @@
 		AE1B37DB29506CD800D2E902 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AE1B37DA29506CD800D2E902 /* .gitignore */; };
 		AE1D39762955649100654BC9 /* UIToolbar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1D39752955649100654BC9 /* UIToolbar+Extensions.swift */; };
 		AE1D397E2955A5EC00654BC9 /* BirthdayUserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1D397D2955A5EC00654BC9 /* BirthdayUserCellView.swift */; };
+		AE1D39842955B58700654BC9 /* ProfileItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1D39832955B58700654BC9 /* ProfileItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		AE1B37DA29506CD800D2E902 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		AE1D39752955649100654BC9 /* UIToolbar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIToolbar+Extensions.swift"; sourceTree = "<group>"; };
 		AE1D397D2955A5EC00654BC9 /* BirthdayUserCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayUserCellView.swift; sourceTree = "<group>"; };
+		AE1D39832955B58700654BC9 /* ProfileItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				AE1D397D2955A5EC00654BC9 /* BirthdayUserCellView.swift */,
+				AE1D39832955B58700654BC9 /* ProfileItemView.swift */,
 			);
 			path = CellViews;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 				65042993295017600020A427 /* SignInViewController.swift in Sources */,
 				650429AD2951884A0020A427 /* UserProfileViewController.swift in Sources */,
 				AE1D397E2955A5EC00654BC9 /* BirthdayUserCellView.swift in Sources */,
+				AE1D39842955B58700654BC9 /* ProfileItemView.swift in Sources */,
 				6504298F295017600020A427 /* AppDelegate.swift in Sources */,
 				650429AB295181C70020A427 /* BirthdayListViewController.swift in Sources */,
 				65042991295017600020A427 /* SceneDelegate.swift in Sources */,
