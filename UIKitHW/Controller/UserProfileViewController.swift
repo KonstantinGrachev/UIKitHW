@@ -21,6 +21,12 @@ final class UserProfileViewController: UIViewController {
             static let generalStackViewSpacing: CGFloat = 30
             static let userAvatarImageViewSize: CGFloat = 100
             static let generalStackViewSideAnchor: CGFloat = 20
+            static let navigationActionButtonsIndentConstraints: CGFloat = 20
+            static let changeAvatarButtonTopAnchor: CGFloat = 10
+        }
+        
+        enum Fonts {
+            static let navigationActionButtonsTitleFont: UIFont = .systemFont(ofSize: 16)
         }
     }
     
@@ -28,14 +34,16 @@ final class UserProfileViewController: UIViewController {
     private lazy var cancelButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Cancel", for: .normal)
+        button.titleLabel?.font = Constants.Fonts.navigationActionButtonsTitleFont
         button.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private lazy var addButton: UIButton = {
+    private lazy var addUserButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("Add", for: .normal)
+        button.titleLabel?.font = Constants.Fonts.navigationActionButtonsTitleFont
         button.addTarget(self, action: #selector(addButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -107,6 +115,8 @@ final class UserProfileViewController: UIViewController {
         let textField = UITextField()
         textField.placeholder = "Enter date"
         textField.inputView = datePicker
+        let toolbar = UIToolbar().ToolbarPiker(mySelect: #selector(dismissDatePicker))
+        textField.inputAccessoryView = toolbar
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.borderStyle = .none
         return textField
@@ -252,7 +262,6 @@ final class UserProfileViewController: UIViewController {
         let datePicker = UIDatePicker()
         datePicker.datePickerMode = .date
         datePicker.preferredDatePickerStyle = .wheels
-        datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
         return datePicker
     }()
     
@@ -282,6 +291,15 @@ final class UserProfileViewController: UIViewController {
     }
     
     //MARK: @objc funcs
+    @objc func dismissDatePicker() {
+        getDate()
+        view.endEditing(true)
+    }
+    
+    @objc func cancelDatePicker(){
+        self.view.endEditing(true)
+    }
+    
     @objc private func cancelButtonTapped() {
         dismiss(animated: true)
     }
@@ -300,18 +318,14 @@ final class UserProfileViewController: UIViewController {
         showInstAlert()
     }
     
-    @objc private func datePickerValueChanged() {
-        getDate()
-    }
-    
     //MARK: flow funcs
     private func getDate() {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, MMM d, yyyy"
         let date = datePicker.date
-        
         dateTextField.text = dateFormatter.string(from: date)
     }
+    
     private func showImagePicker() {
         let picker = UIImagePickerController()
         picker.sourceType = .photoLibrary
@@ -404,7 +418,7 @@ extension UserProfileViewController {
         view.backgroundColor = .secondarySystemBackground
         view.addSubview(generalStackView)
         view.addSubview(cancelButton)
-        view.addSubview(addButton)
+        view.addSubview(addUserButton)
         view.addSubview(userAvatarImageView)
         view.addSubview(changeAvatarButton)
     }
@@ -417,13 +431,13 @@ extension UserProfileViewController {
         ])
         
         NSLayoutConstraint.activate([
-            cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10)
+            cancelButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.Constraints.navigationActionButtonsIndentConstraints),
+            cancelButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Constraints.navigationActionButtonsIndentConstraints)
         ])
         
         NSLayoutConstraint.activate([
-            addButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            addButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+            addUserButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.Constraints.navigationActionButtonsIndentConstraints),
+            addUserButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Constraints.navigationActionButtonsIndentConstraints)
         ])
         
         NSLayoutConstraint.activate([
@@ -434,7 +448,7 @@ extension UserProfileViewController {
         ])
         
         NSLayoutConstraint.activate([
-            changeAvatarButton.topAnchor.constraint(equalTo: userAvatarImageView.bottomAnchor, constant: 10),
+            changeAvatarButton.topAnchor.constraint(equalTo: userAvatarImageView.bottomAnchor, constant: Constants.Constraints.changeAvatarButtonTopAnchor),
             changeAvatarButton.centerXAnchor.constraint(equalTo: userAvatarImageView.centerXAnchor)
         ])
     }
