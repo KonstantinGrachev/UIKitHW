@@ -16,6 +16,7 @@
 		650429AD2951884A0020A427 /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 650429AC2951884A0020A427 /* UserProfileViewController.swift */; };
 		AE1B37DB29506CD800D2E902 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AE1B37DA29506CD800D2E902 /* .gitignore */; };
 		AE1D39762955649100654BC9 /* UIToolbar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1D39752955649100654BC9 /* UIToolbar+Extensions.swift */; };
+		AE1D397E2955A5EC00654BC9 /* BirthdayUserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1D397D2955A5EC00654BC9 /* BirthdayUserCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		650429AC2951884A0020A427 /* UserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
 		AE1B37DA29506CD800D2E902 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		AE1D39752955649100654BC9 /* UIToolbar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIToolbar+Extensions.swift"; sourceTree = "<group>"; };
+		AE1D397D2955A5EC00654BC9 /* BirthdayUserCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirthdayUserCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,9 +64,9 @@
 		6504298D295017600020A427 /* UIKitHW */ = {
 			isa = PBXGroup;
 			children = (
-				AE1D39742955648200654BC9 /* Extensions */,
 				650429A329501A120020A427 /* Application */,
 				650429A429501A1D0020A427 /* Controller */,
+				AE1D39742955648200654BC9 /* Extensions */,
 				650429A229501A0C0020A427 /* Resources */,
 			);
 			path = UIKitHW;
@@ -95,6 +97,7 @@
 			children = (
 				65042992295017600020A427 /* SignInViewController.swift */,
 				650429AA295181C70020A427 /* BirthdayListViewController.swift */,
+				AE1D397F2955AB2D00654BC9 /* CellViews */,
 				650429AC2951884A0020A427 /* UserProfileViewController.swift */,
 			);
 			path = Controller;
@@ -106,6 +109,14 @@
 				AE1D39752955649100654BC9 /* UIToolbar+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AE1D397F2955AB2D00654BC9 /* CellViews */ = {
+			isa = PBXGroup;
+			children = (
+				AE1D397D2955A5EC00654BC9 /* BirthdayUserCellView.swift */,
+			);
+			path = CellViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +192,7 @@
 			files = (
 				65042993295017600020A427 /* SignInViewController.swift in Sources */,
 				650429AD2951884A0020A427 /* UserProfileViewController.swift in Sources */,
+				AE1D397E2955A5EC00654BC9 /* BirthdayUserCellView.swift in Sources */,
 				6504298F295017600020A427 /* AppDelegate.swift in Sources */,
 				650429AB295181C70020A427 /* BirthdayListViewController.swift in Sources */,
 				65042991295017600020A427 /* SceneDelegate.swift in Sources */,
