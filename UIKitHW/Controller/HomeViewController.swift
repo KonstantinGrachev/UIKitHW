@@ -19,17 +19,13 @@ final class HomeViewController: UIViewController {
         return label
     }()
     
-    private lazy var firstSongView = PlayerCellView(trackName: "Track 1",
-                                                    duration: "2:30",
-                                                    albumIcon: UIImage(systemName: "music.note.list"),
-                                               target: self,
-                                               tapAction: #selector(openTrack))
+    private lazy var firstSongView = TrackCellView(trackName: "Track 1",
+                                                   duration: "2:30",
+                                                   albumIcon: UIImage(systemName: "music.note.list"), target: self, selector: #selector(openVC))
     
-    private  lazy var secondSongView = PlayerCellView(trackName: "Track 2",
-                                                    duration: "2:10",
-                                                albumIcon: UIImage(systemName: "music.note.list"),
-                                                target: self,
-                                                tapAction: #selector(openTrack))
+    private  lazy var secondSongView = TrackCellView(trackName: "Track 2",
+                                                    duration: "1:34",
+                                                     albumIcon: UIImage(systemName: "music.note.list"), target: self, selector: #selector(openVC))
     
     private lazy var songsStackView = UIStackView(arrangedSubviews: [firstSongView,
                                                                      secondSongView], spacing: 10)
@@ -40,10 +36,9 @@ final class HomeViewController: UIViewController {
         setConstraints()
     }
     
-    //MARK: @objc funcs
-    
-    @objc private func openTrack() {
-        print("Open this track")
+    @objc private func openVC() {
+        
+        print("tapppp")
     }
 }
 
@@ -53,6 +48,8 @@ extension HomeViewController {
         view.backgroundColor = .secondarySystemBackground
         view.addSubview(appNameLabel)
         view.addSubview(songsStackView)
+        firstSongView.delegate = self
+        secondSongView.delegate = self
     }
 }
 
@@ -70,7 +67,14 @@ extension HomeViewController {
             songsStackView.topAnchor.constraint(equalTo: appNameLabel.bottomAnchor),
             songsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             songsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            songsStackView.heightAnchor.constraint(equalToConstant: 100)
         ])
+    }
+}
+
+extension HomeViewController: TrackCellViewDelegate {
+    func openVCwith(name: String) {
+        let vc = PlayerViewController(trackName: name)
+        print(name)
+        present(vc, animated: true)
     }
 }

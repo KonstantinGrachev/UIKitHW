@@ -14,7 +14,8 @@
 		6504299B295017630020A427 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65042999295017630020A427 /* LaunchScreen.storyboard */; };
 		AE1B37DB29506CD800D2E902 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AE1B37DA29506CD800D2E902 /* .gitignore */; };
 		AE1D39792955905100654BC9 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1D39782955905100654BC9 /* UIStackView+Extensions.swift */; };
-		AE1D397C2955928B00654BC9 /* PlayerCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1D397B2955928B00654BC9 /* PlayerCellView.swift */; };
+		AE1D397C2955928B00654BC9 /* TrackCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1D397B2955928B00654BC9 /* TrackCellView.swift */; };
+		AE1D39862955CBBB00654BC9 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1D39852955CBBB00654BC9 /* PlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +28,8 @@
 		6504299C295017630020A427 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE1B37DA29506CD800D2E902 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		AE1D39782955905100654BC9 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
-		AE1D397B2955928B00654BC9 /* PlayerCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCellView.swift; sourceTree = "<group>"; };
+		AE1D397B2955928B00654BC9 /* TrackCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCellView.swift; sourceTree = "<group>"; };
+		AE1D39852955CBBB00654BC9 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			children = (
 				AE1D397A2955927500654BC9 /* CellView */,
 				65042992295017600020A427 /* HomeViewController.swift */,
+				AE1D39852955CBBB00654BC9 /* PlayerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -108,7 +111,7 @@
 		AE1D397A2955927500654BC9 /* CellView */ = {
 			isa = PBXGroup;
 			children = (
-				AE1D397B2955928B00654BC9 /* PlayerCellView.swift */,
+				AE1D397B2955928B00654BC9 /* TrackCellView.swift */,
 			);
 			path = CellView;
 			sourceTree = "<group>";
@@ -188,7 +191,8 @@
 				AE1D39792955905100654BC9 /* UIStackView+Extensions.swift in Sources */,
 				6504298F295017600020A427 /* AppDelegate.swift in Sources */,
 				65042991295017600020A427 /* SceneDelegate.swift in Sources */,
-				AE1D397C2955928B00654BC9 /* PlayerCellView.swift in Sources */,
+				AE1D397C2955928B00654BC9 /* TrackCellView.swift in Sources */,
+				AE1D39862955CBBB00654BC9 /* PlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

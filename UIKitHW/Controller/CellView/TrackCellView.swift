@@ -7,7 +7,13 @@
 
 import UIKit
 
-class PlayerCellView: UIView {
+protocol TrackCellViewDelegate: AnyObject {
+    func openVCwith(name: String)
+}
+
+class TrackCellView: UIView {
+    
+    weak var delegate: TrackCellViewDelegate?
     
     private let albumIconImageView: UIImageView = {
         let imageView = UIImageView()
@@ -37,7 +43,7 @@ class PlayerCellView: UIView {
         return view
     }()
     
-    private var tapScreen = UITapGestureRecognizer()
+    private lazy var tapScreen = UITapGestureRecognizer()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -45,13 +51,13 @@ class PlayerCellView: UIView {
         setConstraints()
     }
     
-    convenience init(trackName: String, duration: String, albumIcon: UIImage?, target: Any?, tapAction: Selector) {
+    convenience init(trackName: String, duration: String, albumIcon: UIImage?, target: Any, selector: Selector) {
         self.init()
         self.trackNameLabel.text = trackName
         self.durationLabel.text = duration
         self.albumIconImageView.image = albumIcon
-        self.tapScreen = .init(target: target, action: tapAction)
-        self.addGestureRecognizer(tapScreen)
+        self.tapScreen.addTarget(target, action: selector)
+        self.tapScreen.delegate = self
     }
     
     required init?(coder: NSCoder) {
@@ -59,7 +65,7 @@ class PlayerCellView: UIView {
     }
 }
 
-extension PlayerCellView {
+extension TrackCellView {
     private func setupView() {
         backgroundColor = .clear
         translatesAutoresizingMaskIntoConstraints = false
@@ -68,6 +74,7 @@ extension PlayerCellView {
         addSubview(trackNameLabel)
         addSubview(durationLabel)
         addSubview(divisionView)
+        self.addGestureRecognizer(tapScreen)
     }
     
     enum Constants {
@@ -102,7 +109,14 @@ extension PlayerCellView {
             divisionView.trailingAnchor.constraint(equalTo: durationLabel.trailingAnchor),
             divisionView.bottomAnchor.constraint(equalTo: bottomAnchor),
             divisionView.heightAnchor.constraint(equalToConstant: 1)
-
         ])
+    }
+}
+
+extension TrackCellView: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        delegate!.openVCwith(name: trackNameLabel.text!)
+        print(trackNameLabel.text)
+        return true
     }
 }
