@@ -12,16 +12,12 @@ final class BillViewController: UIViewController {
     //MARK: Constants
     enum Constants {
         enum Colors {
-            static let divisionViewColor: UIColor = .systemGray3
-            static let subheaderTextColor: UIColor = .systemGray2
             static let totalLabelColor: UIColor = #colorLiteral(red: 0.3634865582, green: 0.7221052051, blue: 0.353736043, alpha: 1)
         }
         
         enum Constraints {
             static let stackViewSpacing: CGFloat = 10
             static let cornerRadius: CGFloat = 10
-            
-            static let generalStackViewSideAnchor: CGFloat = 20
             
             static let totalLabelBottomAnchor: CGFloat = 50
             static let totalLabelHeightAnchor: CGFloat = 70
@@ -31,8 +27,6 @@ final class BillViewController: UIViewController {
         }
         
         enum Fonts {
-            static let headerLabelFont: UIFont = .boldSystemFont(ofSize: 20)
-            static let subheaderLabelFont: UIFont = .systemFont(ofSize: 16)
             static let totalLabelTitleFont: UIFont = .boldSystemFont(ofSize: 16)
         }
     }
@@ -55,121 +49,16 @@ Table number: \(tableNumber)
         return textView
     }()
     
-    private let firstHeaderLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Caesar salad"
-        label.font = Constants.Fonts.headerLabelFont
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
+    private let fistDishView = OrderCellView(dishHeaderLabel: "Caesar salad",
+                                             subHeader: "Tomato, Iceberg lettuce, crackers, chicken",
+                                             totalSumLabel: "10$")
     
-    private let firstSubHeaderLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Tomato, Iceberg lettuce, crackers, chicken"
-        label.font = Constants.Fonts.subheaderLabelFont
-        label.textColor = Constants.Colors.subheaderTextColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let firstTotalLabel: UILabel = {
-        let label = UILabel()
-        label.text = "10$"
-        label.font = Constants.Fonts.subheaderLabelFont
-        label.textColor = Constants.Colors.subheaderTextColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var firstHorizontalStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [firstHeaderLabel,
-                                                       firstTotalLabel])
-        stackView.axis = .horizontal
-        stackView.distribution = .equalSpacing
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = Constants.Constraints.stackViewSpacing
-        return stackView
-    }()
-    
-    private let firstDivisionView: UIView = {
-        let view = UIView()
-        view.backgroundColor = Constants.Colors.divisionViewColor
-        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var firstVerticalStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [firstHorizontalStackView,
-                                                       firstSubHeaderLabel,
-                                                       firstDivisionView
-                                                      ])
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = Constants.Constraints.stackViewSpacing
-        return stackView
-    }()
-    
-    private let secondHeaderLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Greek salad"
-        label.font = Constants.Fonts.headerLabelFont
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let secondSubHeaderLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Tomato, Iceberg lettuce, crackers, chicken"
-        label.font = Constants.Fonts.subheaderLabelFont
-        label.textColor = Constants.Colors.subheaderTextColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private let secondTotalLabel: UILabel = {
-        let label = UILabel()
-        label.text = "20$"
-        label.font = Constants.Fonts.subheaderLabelFont
-        label.textColor = Constants.Colors.subheaderTextColor
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    private lazy var secondHorizontalStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [secondHeaderLabel,
-                                                       secondTotalLabel
-                                                      ])
-        stackView.distribution = .equalSpacing
-        stackView.axis = .horizontal
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = Constants.Constraints.stackViewSpacing
-        return stackView
-    }()
-    
-    private let secondDivisionView: UIView = {
-        let view = UIView()
-        view.backgroundColor = Constants.Colors.divisionViewColor
-        view.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private lazy var secondVerticalStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [secondHorizontalStackView,
-                                                       secondSubHeaderLabel,
-                                                       secondDivisionView
-                                                      ])
-        stackView.axis = .vertical
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.spacing = Constants.Constraints.stackViewSpacing
-        return stackView
-    }()
+    private let secondDishView = OrderCellView(dishHeaderLabel: "Greek salad",
+                                             subHeader: "Tomato, Iceberg lettuce, crackers, chicken",
+                                             totalSumLabel: "20$")
     
     private lazy var generalStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [firstVerticalStackView,
-                                                       secondVerticalStackView
-                                                      ])
+        let stackView = UIStackView(arrangedSubviews: [fistDishView, secondDishView])
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = Constants.Constraints.stackViewSpacing
@@ -229,8 +118,8 @@ extension BillViewController {
         
         NSLayoutConstraint.activate([
             generalStackView.topAnchor.constraint(equalTo: guestProfileTextView.bottomAnchor),
-            generalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.Constraints.generalStackViewSideAnchor),
-            generalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.Constraints.generalStackViewSideAnchor)
+            generalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            generalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
         NSLayoutConstraint.activate([

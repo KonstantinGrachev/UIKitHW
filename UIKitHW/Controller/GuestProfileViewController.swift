@@ -288,8 +288,6 @@ final class GuestProfileViewController: UIViewController {
     @objc private func billButtonTapped() {
         pushBillScreen()
     }
-    
-    
 }
 
 // MARK: - setupView, setConstraints
