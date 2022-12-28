@@ -225,6 +225,16 @@ final class PlayerViewController: UIViewController {
             view.addSubview(subview)
         }
         
+        
+        //MARK: Constants
+        enum Constants {
+            static let sideIndentation: CGFloat = 20
+            static let topIndentation: CGFloat = 20
+            static let heightWidthGrayButtons: CGFloat = 44
+            static let heightWidthplayPausePlayerButton: CGFloat = 60
+            static let heightWidthPreviousNextPlayerButtons: CGFloat = 44
+        }
+        
         NSLayoutConstraint.activate([
             dismissChevronButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.sideIndentation),
             dismissChevronButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.topIndentation),
@@ -346,14 +356,5 @@ final class PlayerViewController: UIViewController {
             devicesAvailableImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.sideIndentation),
             devicesAvailableImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.sideIndentation)
         ])
-        
-        //MARK: Constants
-        enum Constants {
-            static let sideIndentation: CGFloat = 20
-            static let topIndentation: CGFloat = 20
-            static let heightWidthGrayButtons: CGFloat = 44
-            static let heightWidthplayPausePlayerButton: CGFloat = 60
-            static let heightWidthPreviousNextPlayerButtons: CGFloat = 44
-        }
     }
 }
