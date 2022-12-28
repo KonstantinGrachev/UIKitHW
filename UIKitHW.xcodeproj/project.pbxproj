@@ -8,28 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		6504298F295017600020A427 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6504298E295017600020A427 /* AppDelegate.swift */; };
-		65042991295017600020A427 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65042990295017600020A427 /* SceneDelegate.swift */; };
 		65042993295017600020A427 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65042992295017600020A427 /* HomeViewController.swift */; };
 		65042998295017630020A427 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65042997295017630020A427 /* Assets.xcassets */; };
 		6504299B295017630020A427 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65042999295017630020A427 /* LaunchScreen.storyboard */; };
 		AE1B37DB29506CD800D2E902 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = AE1B37DA29506CD800D2E902 /* .gitignore */; };
-		AE1D39792955905100654BC9 /* UIStackView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1D39782955905100654BC9 /* UIStackView+Extensions.swift */; };
 		AE1D397C2955928B00654BC9 /* TrackCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1D397B2955928B00654BC9 /* TrackCellView.swift */; };
 		AE1D39862955CBBB00654BC9 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1D39852955CBBB00654BC9 /* PlayerViewController.swift */; };
+		AE29CA35295C379B00D74B75 /* CustomPlayerScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE29CA34295C379B00D74B75 /* CustomPlayerScreenButton.swift */; };
+		AE29CA38295C469700D74B75 /* CustomPlayerScreenLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE29CA37295C469600D74B75 /* CustomPlayerScreenLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6504298B295017600020A427 /* UIKitHW.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIKitHW.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6504298E295017600020A427 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		65042990295017600020A427 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		65042992295017600020A427 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		65042997295017630020A427 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6504299A295017630020A427 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6504299C295017630020A427 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AE1B37DA29506CD800D2E902 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
-		AE1D39782955905100654BC9 /* UIStackView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+Extensions.swift"; sourceTree = "<group>"; };
 		AE1D397B2955928B00654BC9 /* TrackCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackCellView.swift; sourceTree = "<group>"; };
 		AE1D39852955CBBB00654BC9 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		AE29CA34295C379B00D74B75 /* CustomPlayerScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlayerScreenButton.swift; sourceTree = "<group>"; };
+		AE29CA37295C469600D74B75 /* CustomPlayerScreenLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlayerScreenLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,9 +62,9 @@
 		6504298D295017600020A427 /* UIKitHW */ = {
 			isa = PBXGroup;
 			children = (
-				AE1D39772955903900654BC9 /* Extensions */,
 				650429A329501A120020A427 /* Application */,
-				650429A429501A1D0020A427 /* Controller */,
+				AE29CA32295C310700D74B75 /* HomeModule */,
+				AE29CA33295C312000D74B75 /* PlayerModule */,
 				650429A229501A0C0020A427 /* Resources */,
 			);
 			path = UIKitHW;
@@ -85,27 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				6504298E295017600020A427 /* AppDelegate.swift */,
-				65042990295017600020A427 /* SceneDelegate.swift */,
 			);
 			path = Application;
-			sourceTree = "<group>";
-		};
-		650429A429501A1D0020A427 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				AE1D397A2955927500654BC9 /* CellView */,
-				65042992295017600020A427 /* HomeViewController.swift */,
-				AE1D39852955CBBB00654BC9 /* PlayerViewController.swift */,
-			);
-			path = Controller;
-			sourceTree = "<group>";
-		};
-		AE1D39772955903900654BC9 /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				AE1D39782955905100654BC9 /* UIStackView+Extensions.swift */,
-			);
-			path = Extensions;
 			sourceTree = "<group>";
 		};
 		AE1D397A2955927500654BC9 /* CellView */ = {
@@ -114,6 +95,33 @@
 				AE1D397B2955928B00654BC9 /* TrackCellView.swift */,
 			);
 			path = CellView;
+			sourceTree = "<group>";
+		};
+		AE29CA32295C310700D74B75 /* HomeModule */ = {
+			isa = PBXGroup;
+			children = (
+				AE1D397A2955927500654BC9 /* CellView */,
+				65042992295017600020A427 /* HomeViewController.swift */,
+			);
+			path = HomeModule;
+			sourceTree = "<group>";
+		};
+		AE29CA33295C312000D74B75 /* PlayerModule */ = {
+			isa = PBXGroup;
+			children = (
+				AE29CA36295C3DB000D74B75 /* CustomItemUI */,
+				AE1D39852955CBBB00654BC9 /* PlayerViewController.swift */,
+			);
+			path = PlayerModule;
+			sourceTree = "<group>";
+		};
+		AE29CA36295C3DB000D74B75 /* CustomItemUI */ = {
+			isa = PBXGroup;
+			children = (
+				AE29CA34295C379B00D74B75 /* CustomPlayerScreenButton.swift */,
+				AE29CA37295C469600D74B75 /* CustomPlayerScreenLabel.swift */,
+			);
+			path = CustomItemUI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,10 +196,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				65042993295017600020A427 /* HomeViewController.swift in Sources */,
-				AE1D39792955905100654BC9 /* UIStackView+Extensions.swift in Sources */,
 				6504298F295017600020A427 /* AppDelegate.swift in Sources */,
-				65042991295017600020A427 /* SceneDelegate.swift in Sources */,
 				AE1D397C2955928B00654BC9 /* TrackCellView.swift in Sources */,
+				AE29CA38295C469700D74B75 /* CustomPlayerScreenLabel.swift in Sources */,
+				AE29CA35295C379B00D74B75 /* CustomPlayerScreenButton.swift in Sources */,
 				AE1D39862955CBBB00654BC9 /* PlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

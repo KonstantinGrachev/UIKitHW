@@ -9,58 +9,70 @@ import UIKit
 
 final class HomeViewController: UIViewController {
     
+    enum Constants {
+        static let appNameLabelFont: UIFont = .systemFont(ofSize: 20, weight: .bold)
+        
+        static let songsStackViewSpacing: CGFloat = 10
+        
+        static let appNameLabelHeightAnchor: CGFloat = 20
+    }
+    
+    //MARK: - UI
     private let appNameLabel: UILabel = {
         let label = UILabel()
         label.text = "Plist"
-        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.font = Constants.appNameLabelFont
         label.textColor = .systemBlue
         label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private lazy var firstSongView = TrackCellView(trackName: "Track 1",
                                                    duration: "2:30",
-                                                   albumIcon: UIImage(systemName: "music.note.list"), target: self, selector: #selector(openVC))
+                                                   albumIcon: UIImage(systemName: "music.note.list"))
     
     private  lazy var secondSongView = TrackCellView(trackName: "Track 2",
-                                                    duration: "1:34",
-                                                     albumIcon: UIImage(systemName: "music.note.list"), target: self, selector: #selector(openVC))
+                                                     duration: "1:34",
+                                                     albumIcon: UIImage(systemName: "music.note.list"))
     
-    private lazy var songsStackView = UIStackView(arrangedSubviews: [firstSongView,
-                                                                     secondSongView], spacing: 10)
+    private lazy var songsStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [firstSongView,
+                                                       secondSongView])
+        stackView.axis = .vertical
+        stackView.spacing = Constants.songsStackViewSpacing
+        return stackView
+    }()
     
+    //MARK: - Lifecyclec funcs
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupView()
-        setConstraints()
+        setDelegates()
+        setupLayoutUI()
     }
     
-    @objc private func openVC() {
-        
-        print("tapppp")
-    }
-}
-
-//MARK: - setupView
-extension HomeViewController {
-    private func setupView() {
-        view.backgroundColor = .secondarySystemBackground
-        view.addSubview(appNameLabel)
-        view.addSubview(songsStackView)
+    //MARK: - setDelegates
+    private func setDelegates() {
         firstSongView.delegate = self
         secondSongView.delegate = self
     }
-}
-
-//MARK: - setConstraints
-extension HomeViewController {
-    private func setConstraints() {
+    
+    //MARK: - setupLayoutUI
+    private func setupLayoutUI() {
+        
+        view.backgroundColor = .secondarySystemBackground
+        
+        let subviews = [appNameLabel, songsStackView]
+        subviews.forEach { subview in
+            subview.translatesAutoresizingMaskIntoConstraints = false
+            view.addSubview(subview)
+        }
+        
+        
         NSLayoutConstraint.activate([
             appNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             appNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             appNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            appNameLabel.heightAnchor.constraint(equalToConstant: 20)
+            appNameLabel.heightAnchor.constraint(equalToConstant: Constants.appNameLabelHeightAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -71,10 +83,10 @@ extension HomeViewController {
     }
 }
 
+//MARK: - TrackCellViewDelegate
 extension HomeViewController: TrackCellViewDelegate {
     func openVCwith(name: String) {
         let vc = PlayerViewController(trackName: name)
-        print(name)
         present(vc, animated: true)
     }
 }
