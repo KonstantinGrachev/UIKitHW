@@ -82,5 +82,14 @@ final class CustomPlayerScreenButton: UIButton {
         setImage(type.image, for: .normal)
         tintColor = type.tintColor
         self.addTarget(target, action: action, for: .touchUpInside)
+        
+        switch type {
+        case .previousPlayer, .playPausePlayer, .nextPlayer:
+            contentHorizontalAlignment = .fill
+            contentVerticalAlignment = .fill
+            imageView?.contentMode = .scaleAspectFit
+        default:
+            return
+        }
     }
 }

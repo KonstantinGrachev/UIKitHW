@@ -37,9 +37,9 @@ enum CustomLabelType {
         case .trackArtistSubheaderLabel:
             return .gray
         case .durationFromStartLabel:
-            return .systemGray4
+            return .systemGray2
         case .durationToEndLabel:
-            return .systemGray4
+            return .systemGray2
         case .devicesAvailableLabel:
             return .systemGray2
         }
@@ -82,6 +82,7 @@ final class CustomPlayerScreenLabel: UILabel {
         text = type.text
         textColor = type.textColor
         font = type.font
+        textAlignment = .center
     }
 }
 
