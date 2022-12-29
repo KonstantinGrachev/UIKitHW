@@ -16,6 +16,11 @@
 		AE1D39862955CBBB00654BC9 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1D39852955CBBB00654BC9 /* PlayerViewController.swift */; };
 		AE29CA35295C379B00D74B75 /* CustomPlayerScreenButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE29CA34295C379B00D74B75 /* CustomPlayerScreenButton.swift */; };
 		AE29CA38295C469700D74B75 /* CustomPlayerScreenLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE29CA37295C469600D74B75 /* CustomPlayerScreenLabel.swift */; };
+		AEAEA785295D898900E91F84 /* PlayerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA784295D898900E91F84 /* PlayerService.swift */; };
+		AEAEA788295D904800E91F84 /* Wiggle.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA786295D904800E91F84 /* Wiggle.mp3 */; };
+		AEAEA789295D904800E91F84 /* Дикий мужчина.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA787295D904800E91F84 /* Дикий мужчина.mp3 */; };
+		AEAEA78D295D9C9D00E91F84 /* Float+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA78C295D9C9D00E91F84 /* Float+Extensions.swift */; };
+		AEAEA78F295D9D7800E91F84 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA78E295D9D7800E91F84 /* Int+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +35,11 @@
 		AE1D39852955CBBB00654BC9 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		AE29CA34295C379B00D74B75 /* CustomPlayerScreenButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlayerScreenButton.swift; sourceTree = "<group>"; };
 		AE29CA37295C469600D74B75 /* CustomPlayerScreenLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPlayerScreenLabel.swift; sourceTree = "<group>"; };
+		AEAEA784295D898900E91F84 /* PlayerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerService.swift; sourceTree = "<group>"; };
+		AEAEA786295D904800E91F84 /* Wiggle.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Wiggle.mp3; sourceTree = "<group>"; };
+		AEAEA787295D904800E91F84 /* Дикий мужчина.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Дикий мужчина.mp3"; sourceTree = "<group>"; };
+		AEAEA78C295D9C9D00E91F84 /* Float+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extensions.swift"; sourceTree = "<group>"; };
+		AEAEA78E295D9D7800E91F84 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,9 +73,11 @@
 			isa = PBXGroup;
 			children = (
 				650429A329501A120020A427 /* Application */,
+				AEAEA78B295D9C8900E91F84 /* Extensions */,
 				AE29CA32295C310700D74B75 /* HomeModule */,
 				AE29CA33295C312000D74B75 /* PlayerModule */,
 				650429A229501A0C0020A427 /* Resources */,
+				AEAEA783295D897100E91F84 /* Services */,
 			);
 			path = UIKitHW;
 			sourceTree = "<group>";
@@ -77,6 +89,7 @@
 				65042999295017630020A427 /* LaunchScreen.storyboard */,
 				6504299C295017630020A427 /* Info.plist */,
 				AE1B37DA29506CD800D2E902 /* .gitignore */,
+				AEAEA78A295D905200E91F84 /* mp3 */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -122,6 +135,32 @@
 				AE29CA37295C469600D74B75 /* CustomPlayerScreenLabel.swift */,
 			);
 			path = CustomItemUI;
+			sourceTree = "<group>";
+		};
+		AEAEA783295D897100E91F84 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				AEAEA784295D898900E91F84 /* PlayerService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		AEAEA78A295D905200E91F84 /* mp3 */ = {
+			isa = PBXGroup;
+			children = (
+				AEAEA787295D904800E91F84 /* Дикий мужчина.mp3 */,
+				AEAEA786295D904800E91F84 /* Wiggle.mp3 */,
+			);
+			path = mp3;
+			sourceTree = "<group>";
+		};
+		AEAEA78B295D9C8900E91F84 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				AEAEA78C295D9C9D00E91F84 /* Float+Extensions.swift */,
+				AEAEA78E295D9D7800E91F84 /* Int+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -183,8 +222,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				6504299B295017630020A427 /* LaunchScreen.storyboard in Resources */,
+				AEAEA789295D904800E91F84 /* Дикий мужчина.mp3 in Resources */,
 				AE1B37DB29506CD800D2E902 /* .gitignore in Resources */,
 				65042998295017630020A427 /* Assets.xcassets in Resources */,
+				AEAEA788295D904800E91F84 /* Wiggle.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +237,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				65042993295017600020A427 /* HomeViewController.swift in Sources */,
+				AEAEA785295D898900E91F84 /* PlayerService.swift in Sources */,
+				AEAEA78D295D9C9D00E91F84 /* Float+Extensions.swift in Sources */,
+				AEAEA78F295D9D7800E91F84 /* Int+Extensions.swift in Sources */,
 				6504298F295017600020A427 /* AppDelegate.swift in Sources */,
 				AE1D397C2955928B00654BC9 /* TrackCellView.swift in Sources */,
 				AE29CA38295C469700D74B75 /* CustomPlayerScreenLabel.swift in Sources */,

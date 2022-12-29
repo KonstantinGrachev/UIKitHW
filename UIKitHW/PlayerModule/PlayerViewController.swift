@@ -70,14 +70,12 @@ final class PlayerViewController: UIViewController {
     private let durationFromStartLabel: CustomPlayerScreenLabel = {
         let label = CustomPlayerScreenLabel()
         label.configure(type: .durationFromStartLabel)
-        label.text = "00:00"
         return label
     }()
     
     private let durationToEndLabel: CustomPlayerScreenLabel = {
         let label = CustomPlayerScreenLabel()
         label.configure(type: .durationToEndLabel)
-        label.text = "-03:59"
         return label
     }()
     
@@ -124,10 +122,25 @@ final class PlayerViewController: UIViewController {
         return label
     }()
     
-    private let trackDurationSlider: UISlider = {
+    private lazy var trackDurationSlider: UISlider = {
         let slider = UISlider()
+        slider.addTarget(self, action: #selector(trackDurationSliderValueChanged), for: .valueChanged)
         return slider
     }()
+    
+    //MARK: Internal properties
+    var trackName: String
+    
+    private lazy var playerService: PlayerService = {
+        let playerService = PlayerService()
+        playerService.trackName = trackName
+        return playerService
+    }()
+    
+    private lazy var trackTimer = Timer(timeInterval: 1, repeats: true) { [weak self] _ in
+        let time = self?.playerService.getCurrentTime()
+        self?.trackDurationSlider.value =
+    }
     
     //MARK: Initialization
     init(trackName: String) {
@@ -140,14 +153,15 @@ final class PlayerViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: Internal properties
-    var trackName: String
+
     
     //MARK: Lifecycle func
     override func viewDidLoad() {
         super.viewDidLoad()
         setupLayoutUI()
         configure()
+        playerService.setPlayer()
+        setTrackSlider()
     }
     
     //MARK: Private funcs
@@ -157,7 +171,27 @@ final class PlayerViewController: UIViewController {
         trackArtistSubheaderLabel.text = "Unknown artist"
     }
     
+    private func setTrackSlider() {
+        guard let duration = playerService.getDuration() else { return }
+        trackDurationSlider.minimumValue = 0
+        trackDurationSlider.maximumValue = Float(duration)
+        setDurationLabels()
+        
+    }
+    
+    private func setDurationLabels() {
+        let startPosition = trackDurationSlider.minimumValue.convertSeconds()
+        let endPosition = trackDurationSlider.maximumValue.convertSeconds()
+        
+        durationFromStartLabel.text = "\(startPosition.0.setZeroForSecond()):\(startPosition.1.setZeroForSecond())"
+        durationToEndLabel.text = "\(endPosition.0.setZeroForSecond()):\(endPosition.1.setZeroForSecond())"
+    }
+    
     //MARK: action funcs
+    
+    @objc private func trackDurationSliderValueChanged() {
+        playerService.setSelectTime(timeInterval: TimeInterval(trackDurationSlider.value))
+    }
     
     @objc private func dismissChevronButtonTapped() {
         dismiss(animated: true)
@@ -185,10 +219,12 @@ final class PlayerViewController: UIViewController {
 
     @objc private func playPausePlayerButtonTapped() {
         print("playPausePlayerButtonTapped")
+        playerService.playTrack()
     }
 
     @objc private func nextPlayerButtonTapped() {
         print("nextPlayerButtonTapped")
+        
     }
     
     @objc private func repeatPlayerButtonTapped() {

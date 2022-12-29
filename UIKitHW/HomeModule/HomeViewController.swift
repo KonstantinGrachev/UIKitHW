@@ -27,11 +27,11 @@ final class HomeViewController: UIViewController {
         return label
     }()
     
-    private lazy var firstSongView = TrackCellView(trackName: "Track 1",
+    private lazy var firstSongView = TrackCellView(trackName: "Wiggle",
                                                    duration: "2:30",
                                                    albumIcon: UIImage(systemName: "music.note.list"))
     
-    private  lazy var secondSongView = TrackCellView(trackName: "Track 2",
+    private  lazy var secondSongView = TrackCellView(trackName: "Дикий мужчина",
                                                      duration: "1:34",
                                                      albumIcon: UIImage(systemName: "music.note.list"))
     
