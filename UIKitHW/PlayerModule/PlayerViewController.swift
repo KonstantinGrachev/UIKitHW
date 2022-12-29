@@ -137,10 +137,7 @@ final class PlayerViewController: UIViewController {
         return playerService
     }()
     
-    private lazy var trackTimer = Timer(timeInterval: 1, repeats: true) { [weak self] _ in
-        let time = self?.playerService.getCurrentTime()
-        self?.trackDurationSlider.value =
-    }
+    private lazy var trackTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(trackSliderValue), userInfo: nil, repeats: true)
     
     //MARK: Initialization
     init(trackName: String) {
@@ -180,17 +177,23 @@ final class PlayerViewController: UIViewController {
     }
     
     private func setDurationLabels() {
-        let startPosition = trackDurationSlider.minimumValue.convertSeconds()
-        let endPosition = trackDurationSlider.maximumValue.convertSeconds()
+        let startPosition = trackDurationSlider.value.convertSeconds()
+        let endPosition = (trackDurationSlider.maximumValue - trackDurationSlider.value).convertSeconds()
         
         durationFromStartLabel.text = "\(startPosition.0.setZeroForSecond()):\(startPosition.1.setZeroForSecond())"
-        durationToEndLabel.text = "\(endPosition.0.setZeroForSecond()):\(endPosition.1.setZeroForSecond())"
+        durationToEndLabel.text = "-\(endPosition.0.setZeroForSecond()):\(endPosition.1.setZeroForSecond())"
     }
     
     //MARK: action funcs
     
     @objc private func trackDurationSliderValueChanged() {
         playerService.setSelectTime(timeInterval: TimeInterval(trackDurationSlider.value))
+    }
+    
+    @objc private func trackSliderValue() {
+        guard let time = playerService.getCurrentTime() else { return }
+        trackDurationSlider.value = Float(time)
+        setDurationLabels()
     }
     
     @objc private func dismissChevronButtonTapped() {
@@ -220,6 +223,7 @@ final class PlayerViewController: UIViewController {
     @objc private func playPausePlayerButtonTapped() {
         print("playPausePlayerButtonTapped")
         playerService.playTrack()
+        trackTimer.fire()
     }
 
     @objc private func nextPlayerButtonTapped() {
