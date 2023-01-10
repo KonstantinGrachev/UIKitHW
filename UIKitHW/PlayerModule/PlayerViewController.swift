@@ -11,7 +11,8 @@ final class PlayerViewController: UIViewController {
     
     //MARK: Constants
     enum Constants {
-        static let sideIndentation: CGFloat = 20
+        static let leadingBasicSideIndentation: CGFloat = 20
+        static let trailingBasicSideIndentation: CGFloat = -20
         static let topIndentation: CGFloat = 20
         static let heightWidthGrayButtons: CGFloat = 44
         static let heightWidthplayPausePlayerButton: CGFloat = 60
@@ -280,28 +281,28 @@ final class PlayerViewController: UIViewController {
     private func setupButtonsAndSlider() {
         
         NSLayoutConstraint.activate([
-            dismissChevronButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.sideIndentation),
+            dismissChevronButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.leadingBasicSideIndentation),
             dismissChevronButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.topIndentation),
             dismissChevronButton.heightAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons),
             dismissChevronButton.widthAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons)
         ])
         
         NSLayoutConstraint.activate([
-            shareActivityButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.sideIndentation),
+            shareActivityButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.trailingBasicSideIndentation),
             shareActivityButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.topIndentation),
             shareActivityButton.heightAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons),
             shareActivityButton.widthAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons)
         ])
         
         NSLayoutConstraint.activate([
-            addToPlaylistButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.sideIndentation),
+            addToPlaylistButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.leadingBasicSideIndentation),
             addToPlaylistButton.topAnchor.constraint(equalTo: albumImageView.bottomAnchor, constant: Constants.topIndentation),
             addToPlaylistButton.heightAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons),
             addToPlaylistButton.widthAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons)
         ])
         
         NSLayoutConstraint.activate([
-            infoDescriptionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.sideIndentation),
+            infoDescriptionButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.trailingBasicSideIndentation),
             infoDescriptionButton.topAnchor.constraint(equalTo: albumImageView.bottomAnchor, constant: Constants.topIndentation),
             infoDescriptionButton.heightAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons),
             infoDescriptionButton.widthAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons)
@@ -309,8 +310,8 @@ final class PlayerViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             trackDurationSlider.topAnchor.constraint(equalTo: trackArtistSubheaderLabel.bottomAnchor, constant: Constants.topIndentation),
-            trackDurationSlider.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.sideIndentation),
-            trackDurationSlider.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.sideIndentation)
+            trackDurationSlider.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.leadingBasicSideIndentation),
+            trackDurationSlider.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.trailingBasicSideIndentation)
         ])
         
         NSLayoutConstraint.activate([
@@ -321,7 +322,7 @@ final class PlayerViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            shufflePlayerButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.sideIndentation),
+            shufflePlayerButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.leadingBasicSideIndentation),
             shufflePlayerButton.centerYAnchor.constraint(equalTo: playPausePlayerButton.centerYAnchor),
             shufflePlayerButton.heightAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons),
             shufflePlayerButton.widthAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons)
@@ -342,7 +343,7 @@ final class PlayerViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            repeatPlayerButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.sideIndentation),
+            repeatPlayerButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.trailingBasicSideIndentation),
             repeatPlayerButton.centerYAnchor.constraint(equalTo: playPausePlayerButton.centerYAnchor),
             repeatPlayerButton.heightAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons),
             repeatPlayerButton.widthAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons)
@@ -363,8 +364,8 @@ final class PlayerViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            albumImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.sideIndentation),
-            albumImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.sideIndentation),
+            albumImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.leadingBasicSideIndentation),
+            albumImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.trailingBasicSideIndentation),
             albumImageView.topAnchor.constraint(equalTo: topScreenAlbumHeaderLabel.bottomAnchor, constant: Constants.topIndentation),
             albumImageView.heightAnchor.constraint(equalTo: albumImageView.widthAnchor)
         ])
@@ -393,14 +394,14 @@ final class PlayerViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             devicesAvailableLabel.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            devicesAvailableLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.sideIndentation),
-            devicesAvailableLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.sideIndentation)
+            devicesAvailableLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.leadingBasicSideIndentation),
+            devicesAvailableLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.trailingBasicSideIndentation)
         ])
         
         NSLayoutConstraint.activate([
             devicesAvailableImageView.bottomAnchor.constraint(equalTo: devicesAvailableLabel.topAnchor),
-            devicesAvailableImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.sideIndentation),
-            devicesAvailableImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.sideIndentation)
+            devicesAvailableImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.leadingBasicSideIndentation),
+            devicesAvailableImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.trailingBasicSideIndentation)
         ])
     }
 }
