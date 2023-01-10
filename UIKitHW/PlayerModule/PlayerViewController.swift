@@ -8,7 +8,18 @@
 import UIKit
 
 final class PlayerViewController: UIViewController {
-
+    
+    //MARK: Constants
+    enum Constants {
+        static let sideIndentation: CGFloat = 20
+        static let topIndentation: CGFloat = 20
+        static let heightWidthGrayButtons: CGFloat = 44
+        static let heightWidthplayPausePlayerButton: CGFloat = 60
+        static let heightWidthPreviousNextPlayerButtons: CGFloat = 44
+        static let albumImageViewCornerRadius: CGFloat = 10
+        static let albumImageViewBorderWidth: CGFloat = 1
+    }
+    
     //MARK: UI
     private let topScreenAlbumFromSubheaderLabel: CustomPlayerScreenLabel = {
         let label = CustomPlayerScreenLabel()
@@ -37,8 +48,8 @@ final class PlayerViewController: UIViewController {
     private let albumImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.layer.borderWidth = 1
-        imageView.layer.cornerRadius = 10
+        imageView.layer.borderWidth = Constants.albumImageViewBorderWidth
+        imageView.layer.cornerRadius = Constants.albumImageViewCornerRadius
         imageView.layer.borderColor = UIColor.white.cgColor
         return imageView
     }()
@@ -129,7 +140,6 @@ final class PlayerViewController: UIViewController {
     }()
     
     //MARK: Internal properties
-
     var viewModel: PlayerViewModelProtocol?
     
     //MARK: Private properties
@@ -141,6 +151,8 @@ final class PlayerViewController: UIViewController {
         playerService?.setPlayer()
         setTrackSlider()
         setupUI()
+        setupButtonsAndSlider()
+        setupLabelsAndImageViews()
         configureUIfromViewModel()
     }
     
@@ -263,16 +275,9 @@ final class PlayerViewController: UIViewController {
             subview.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(subview)
         }
-        
-        
-        //MARK: Constants
-        enum Constants {
-            static let sideIndentation: CGFloat = 20
-            static let topIndentation: CGFloat = 20
-            static let heightWidthGrayButtons: CGFloat = 44
-            static let heightWidthplayPausePlayerButton: CGFloat = 60
-            static let heightWidthPreviousNextPlayerButtons: CGFloat = 44
-        }
+    }
+    
+    private func setupButtonsAndSlider() {
         
         NSLayoutConstraint.activate([
             dismissChevronButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.sideIndentation),
@@ -286,25 +291,6 @@ final class PlayerViewController: UIViewController {
             shareActivityButton.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.topIndentation),
             shareActivityButton.heightAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons),
             shareActivityButton.widthAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons)
-        ])
-        
-        NSLayoutConstraint.activate([
-            topScreenAlbumFromSubheaderLabel.topAnchor.constraint(equalTo: dismissChevronButton.topAnchor),
-            topScreenAlbumFromSubheaderLabel.leadingAnchor.constraint(equalTo: dismissChevronButton.trailingAnchor),
-            topScreenAlbumFromSubheaderLabel.trailingAnchor.constraint(equalTo: shareActivityButton.leadingAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            topScreenAlbumHeaderLabel.bottomAnchor.constraint(equalTo: dismissChevronButton.bottomAnchor),
-            topScreenAlbumHeaderLabel.leadingAnchor.constraint(equalTo: dismissChevronButton.trailingAnchor),
-            topScreenAlbumHeaderLabel.trailingAnchor.constraint(equalTo: shareActivityButton.leadingAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            albumImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.sideIndentation),
-            albumImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.sideIndentation),
-            albumImageView.topAnchor.constraint(equalTo: topScreenAlbumHeaderLabel.bottomAnchor, constant: Constants.topIndentation),
-            albumImageView.heightAnchor.constraint(equalTo: albumImageView.widthAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -322,31 +308,9 @@ final class PlayerViewController: UIViewController {
         ])
         
         NSLayoutConstraint.activate([
-            trackNameHeaderLabel.centerYAnchor.constraint(equalTo: addToPlaylistButton.centerYAnchor),
-            trackNameHeaderLabel.leadingAnchor.constraint(equalTo: addToPlaylistButton.trailingAnchor),
-            trackNameHeaderLabel.trailingAnchor.constraint(equalTo: infoDescriptionButton.leadingAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            trackArtistSubheaderLabel.topAnchor.constraint(equalTo: trackNameHeaderLabel.bottomAnchor),
-            trackArtistSubheaderLabel.leadingAnchor.constraint(equalTo: addToPlaylistButton.trailingAnchor),
-            trackArtistSubheaderLabel.trailingAnchor.constraint(equalTo: infoDescriptionButton.leadingAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
             trackDurationSlider.topAnchor.constraint(equalTo: trackArtistSubheaderLabel.bottomAnchor, constant: Constants.topIndentation),
             trackDurationSlider.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.sideIndentation),
             trackDurationSlider.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.sideIndentation)
-        ])
-        
-        NSLayoutConstraint.activate([
-            durationFromStartLabel.leadingAnchor.constraint(equalTo: trackDurationSlider.leadingAnchor),
-            durationFromStartLabel.bottomAnchor.constraint(equalTo: trackDurationSlider.topAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            durationToEndLabel.trailingAnchor.constraint(equalTo: trackDurationSlider.trailingAnchor),
-            durationToEndLabel.bottomAnchor.constraint(equalTo: trackDurationSlider.topAnchor)
         ])
         
         NSLayoutConstraint.activate([
@@ -382,6 +346,49 @@ final class PlayerViewController: UIViewController {
             repeatPlayerButton.centerYAnchor.constraint(equalTo: playPausePlayerButton.centerYAnchor),
             repeatPlayerButton.heightAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons),
             repeatPlayerButton.widthAnchor.constraint(equalToConstant: Constants.heightWidthGrayButtons)
+        ])
+    }
+    
+    private func setupLabelsAndImageViews() {
+        NSLayoutConstraint.activate([
+            topScreenAlbumFromSubheaderLabel.topAnchor.constraint(equalTo: dismissChevronButton.topAnchor),
+            topScreenAlbumFromSubheaderLabel.leadingAnchor.constraint(equalTo: dismissChevronButton.trailingAnchor),
+            topScreenAlbumFromSubheaderLabel.trailingAnchor.constraint(equalTo: shareActivityButton.leadingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            topScreenAlbumHeaderLabel.bottomAnchor.constraint(equalTo: dismissChevronButton.bottomAnchor),
+            topScreenAlbumHeaderLabel.leadingAnchor.constraint(equalTo: dismissChevronButton.trailingAnchor),
+            topScreenAlbumHeaderLabel.trailingAnchor.constraint(equalTo: shareActivityButton.leadingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            albumImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.sideIndentation),
+            albumImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -Constants.sideIndentation),
+            albumImageView.topAnchor.constraint(equalTo: topScreenAlbumHeaderLabel.bottomAnchor, constant: Constants.topIndentation),
+            albumImageView.heightAnchor.constraint(equalTo: albumImageView.widthAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            trackNameHeaderLabel.centerYAnchor.constraint(equalTo: addToPlaylistButton.centerYAnchor),
+            trackNameHeaderLabel.leadingAnchor.constraint(equalTo: addToPlaylistButton.trailingAnchor),
+            trackNameHeaderLabel.trailingAnchor.constraint(equalTo: infoDescriptionButton.leadingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            trackArtistSubheaderLabel.topAnchor.constraint(equalTo: trackNameHeaderLabel.bottomAnchor),
+            trackArtistSubheaderLabel.leadingAnchor.constraint(equalTo: addToPlaylistButton.trailingAnchor),
+            trackArtistSubheaderLabel.trailingAnchor.constraint(equalTo: infoDescriptionButton.leadingAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            durationFromStartLabel.leadingAnchor.constraint(equalTo: trackDurationSlider.leadingAnchor),
+            durationFromStartLabel.bottomAnchor.constraint(equalTo: trackDurationSlider.topAnchor)
+        ])
+        
+        NSLayoutConstraint.activate([
+            durationToEndLabel.trailingAnchor.constraint(equalTo: trackDurationSlider.trailingAnchor),
+            durationToEndLabel.bottomAnchor.constraint(equalTo: trackDurationSlider.topAnchor)
         ])
         
         NSLayoutConstraint.activate([
