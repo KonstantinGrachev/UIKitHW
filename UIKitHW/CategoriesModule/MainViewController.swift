@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class CategoriesViewController: UIViewController {
+final class MainViewController: UIViewController {
     
     //MARK: Constants
     enum Constants {
@@ -20,14 +20,15 @@ final class CategoriesViewController: UIViewController {
         static let viewBackgroundColor: UIColor = .systemBackground
     }
     
-    //MARK: viewModel
-    let categoriesViewModel: CategoriesViewModelProtocol = CategoriesViewModel()
+    //MARK: internal properties
+    var viewModel: MainViewModelProtocol?
+    var coordinator: AppCoordinator?
     
     //MARK: UI
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = Constants.titleLabelFont
-        label.text = categoriesViewModel.title
+        label.text = viewModel?.title
         return label
     }()
     
@@ -70,7 +71,7 @@ final class CategoriesViewController: UIViewController {
     
     //MARK: setupUI
     private func configureCategoryViews() {
-        let names = categoriesViewModel.namesCategories
+        guard let names = viewModel?.namesCategories else { return }
         firstCategory.configure(with: names[0], UIImage(systemName: "folder.fill"))
         secondCategory.configure(with: names[1], UIImage(systemName: "folder.fill"))
         thirdCategory.configure(with: names[2], UIImage(systemName: "folder.fill"))
@@ -93,13 +94,15 @@ final class CategoriesViewController: UIViewController {
         NSLayoutConstraint.activate([
             categoriesStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: Constants.categoriesStackViewTopAnchor),
             categoriesStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.basicLeadingAnchor),
-            categoriesStackView.trailingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.basicTrailingAnchor),
+            categoriesStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.basicTrailingAnchor),
         ])
     }
 }
 
-extension CategoriesViewController: CategoryViewDelegate {
+//MARK: - CategoryViewDelegate
+extension MainViewController: CategoryViewDelegate {
     func openVCwith(name: String) {
-        print("open new module with: \(name)")
+        let vc = CategoryViewController(title: name)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
