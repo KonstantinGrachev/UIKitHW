@@ -21,6 +21,14 @@
 		AEAEA789295D904800E91F84 /* Дикий мужчина.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = AEAEA787295D904800E91F84 /* Дикий мужчина.mp3 */; };
 		AEAEA78D295D9C9D00E91F84 /* Float+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA78C295D9C9D00E91F84 /* Float+Extensions.swift */; };
 		AEAEA78F295D9D7800E91F84 /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEAEA78E295D9D7800E91F84 /* Int+Extensions.swift */; };
+		AEDE5F73296D74CD00DD541F /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE5F72296D74CD00DD541F /* Coordinator.swift */; };
+		AEDE5F75296D750F00DD541F /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE5F74296D750F00DD541F /* AppCoordinator.swift */; };
+		AEDE5F77296D766000DD541F /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE5F76296D766000DD541F /* HomeViewModel.swift */; };
+		AEDE5F79296D767A00DD541F /* HomeViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE5F78296D767A00DD541F /* HomeViewModelProtocol.swift */; };
+		AEDE5F7C296D771500DD541F /* TrackModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE5F7B296D771500DD541F /* TrackModel.swift */; };
+		AEDE5F7E296D85FC00DD541F /* MockMusicData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE5F7D296D85FC00DD541F /* MockMusicData.swift */; };
+		AEDE5F80296D9CD300DD541F /* PlayerViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE5F7F296D9CD300DD541F /* PlayerViewModelProtocol.swift */; };
+		AEDE5F82296D9CE300DD541F /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEDE5F81296D9CE300DD541F /* PlayerViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +48,14 @@
 		AEAEA787295D904800E91F84 /* Дикий мужчина.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Дикий мужчина.mp3"; sourceTree = "<group>"; };
 		AEAEA78C295D9C9D00E91F84 /* Float+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Float+Extensions.swift"; sourceTree = "<group>"; };
 		AEAEA78E295D9D7800E91F84 /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
+		AEDE5F72296D74CD00DD541F /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		AEDE5F74296D750F00DD541F /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		AEDE5F76296D766000DD541F /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		AEDE5F78296D767A00DD541F /* HomeViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModelProtocol.swift; sourceTree = "<group>"; };
+		AEDE5F7B296D771500DD541F /* TrackModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackModel.swift; sourceTree = "<group>"; };
+		AEDE5F7D296D85FC00DD541F /* MockMusicData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMusicData.swift; sourceTree = "<group>"; };
+		AEDE5F7F296D9CD300DD541F /* PlayerViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModelProtocol.swift; sourceTree = "<group>"; };
+		AEDE5F81296D9CE300DD541F /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,8 +89,10 @@
 			isa = PBXGroup;
 			children = (
 				650429A329501A120020A427 /* Application */,
+				AEDE5F71296D74B700DD541F /* Coordinator */,
 				AEAEA78B295D9C8900E91F84 /* Extensions */,
 				AE29CA32295C310700D74B75 /* HomeModule */,
+				AEDE5F7A296D76FE00DD541F /* Models */,
 				AE29CA33295C312000D74B75 /* PlayerModule */,
 				650429A229501A0C0020A427 /* Resources */,
 				AEAEA783295D897100E91F84 /* Services */,
@@ -115,6 +133,8 @@
 			children = (
 				AE1D397A2955927500654BC9 /* CellView */,
 				65042992295017600020A427 /* HomeViewController.swift */,
+				AEDE5F76296D766000DD541F /* HomeViewModel.swift */,
+				AEDE5F78296D767A00DD541F /* HomeViewModelProtocol.swift */,
 			);
 			path = HomeModule;
 			sourceTree = "<group>";
@@ -124,6 +144,8 @@
 			children = (
 				AE29CA36295C3DB000D74B75 /* CustomItemUI */,
 				AE1D39852955CBBB00654BC9 /* PlayerViewController.swift */,
+				AEDE5F7F296D9CD300DD541F /* PlayerViewModelProtocol.swift */,
+				AEDE5F81296D9CE300DD541F /* PlayerViewModel.swift */,
 			);
 			path = PlayerModule;
 			sourceTree = "<group>";
@@ -141,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				AEAEA784295D898900E91F84 /* PlayerService.swift */,
+				AEDE5F7D296D85FC00DD541F /* MockMusicData.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -161,6 +184,23 @@
 				AEAEA78E295D9D7800E91F84 /* Int+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		AEDE5F71296D74B700DD541F /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				AEDE5F72296D74CD00DD541F /* Coordinator.swift */,
+				AEDE5F74296D750F00DD541F /* AppCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		AEDE5F7A296D76FE00DD541F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AEDE5F7B296D771500DD541F /* TrackModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,15 +276,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AEDE5F75296D750F00DD541F /* AppCoordinator.swift in Sources */,
 				65042993295017600020A427 /* HomeViewController.swift in Sources */,
 				AEAEA785295D898900E91F84 /* PlayerService.swift in Sources */,
+				AEDE5F80296D9CD300DD541F /* PlayerViewModelProtocol.swift in Sources */,
+				AEDE5F73296D74CD00DD541F /* Coordinator.swift in Sources */,
+				AEDE5F7E296D85FC00DD541F /* MockMusicData.swift in Sources */,
 				AEAEA78D295D9C9D00E91F84 /* Float+Extensions.swift in Sources */,
 				AEAEA78F295D9D7800E91F84 /* Int+Extensions.swift in Sources */,
+				AEDE5F79296D767A00DD541F /* HomeViewModelProtocol.swift in Sources */,
 				6504298F295017600020A427 /* AppDelegate.swift in Sources */,
+				AEDE5F77296D766000DD541F /* HomeViewModel.swift in Sources */,
+				AEDE5F7C296D771500DD541F /* TrackModel.swift in Sources */,
 				AE1D397C2955928B00654BC9 /* TrackCellView.swift in Sources */,
 				AE29CA38295C469700D74B75 /* CustomPlayerScreenLabel.swift in Sources */,
 				AE29CA35295C379B00D74B75 /* CustomPlayerScreenButton.swift in Sources */,
 				AE1D39862955CBBB00654BC9 /* PlayerViewController.swift in Sources */,
+				AEDE5F82296D9CE300DD541F /* PlayerViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

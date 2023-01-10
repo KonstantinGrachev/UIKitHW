@@ -8,15 +8,16 @@
 import Foundation
 import AVFoundation
 
-class PlayerService {
+final class PlayerService {
     
     var player: AVAudioPlayer?
-    var trackName: String?
+    var trackModel: TrackModel?
+    
+    var isPlaying: Bool = false
     
     func setPlayer() {
-        guard let url = Bundle.main.url(forResource: trackName, withExtension: "mp3") else { return }
+        guard let url = Bundle.main.url(forResource: trackModel?.trackName, withExtension: trackModel?.type.rawValue) else { return }
         do {
-            
             player = try AVAudioPlayer(contentsOf: url)
         } catch let error {
             print(error.localizedDescription)
@@ -24,17 +25,11 @@ class PlayerService {
     }
     
     func playTrack() {
-  
-            player?.play()
-        
+        player?.play()
     }
     
     func stopTrack() {
         player?.stop()
-    }
-    
-    func setTrackName(trackName: String) {
-        self.trackName = trackName
     }
     
     func getDuration() -> TimeInterval? {
@@ -47,6 +42,11 @@ class PlayerService {
     
     func setSelectTime(timeInterval: TimeInterval) {
         player?.currentTime = timeInterval
+    }
+    
+    func getAllTracks() -> [TrackModel] {
+        let data = MockMusicData()
+        return data.tracks
     }
 }
 

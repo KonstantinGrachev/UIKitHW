@@ -84,7 +84,11 @@ final class CustomPlayerScreenButton: UIButton {
         self.addTarget(target, action: action, for: .touchUpInside)
         
         switch type {
-        case .previousPlayer, .playPausePlayer, .nextPlayer:
+        case .previousPlayer, .nextPlayer:
+            contentHorizontalAlignment = .fill
+            contentVerticalAlignment = .fill
+            imageView?.contentMode = .scaleAspectFit
+        case .playPausePlayer:
             contentHorizontalAlignment = .fill
             contentVerticalAlignment = .fill
             imageView?.contentMode = .scaleAspectFit

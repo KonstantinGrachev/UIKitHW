@@ -35,7 +35,7 @@ final class PlayerViewController: UIViewController {
     }()
     
     private let albumImageView: UIImageView = {
-        let imageView = UIImageView(image: UIImage(systemName: "music.note.list"))
+        let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
         imageView.layer.borderWidth = 1
         imageView.layer.cornerRadius = 10
@@ -129,51 +129,35 @@ final class PlayerViewController: UIViewController {
     }()
     
     //MARK: Internal properties
-    var trackName: String
-    
-    private lazy var playerService: PlayerService = {
-        let playerService = PlayerService()
-        playerService.trackName = trackName
-        return playerService
-    }()
-    
-    private lazy var trackTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(trackSliderValue), userInfo: nil, repeats: true)
-    
-    //MARK: Initialization
-    init(trackName: String) {
-        self.trackName = trackName
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    @available (*, unavailable)
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 
+    var viewModel: PlayerViewModelProtocol?
+    
+    //MARK: Private properties
+    private lazy var playerService = viewModel?.playerService
     
     //MARK: Lifecycle func
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupLayoutUI()
-        configure()
-        playerService.setPlayer()
+        playerService?.setPlayer()
         setTrackSlider()
+        setupUI()
+        configureUIfromViewModel()
     }
     
     //MARK: Private funcs
-    private func configure() {
-        topScreenAlbumHeaderLabel.text = trackName
-        trackNameHeaderLabel.text = trackName
-        trackArtistSubheaderLabel.text = "Unknown artist"
+    private func configureUIfromViewModel() {
+        guard let trackInfo = viewModel?.trackModel else { return }
+        topScreenAlbumHeaderLabel.text = trackInfo.albumName
+        trackNameHeaderLabel.text = trackInfo.trackName
+        trackArtistSubheaderLabel.text = trackInfo.artist
+        albumImageView.image = UIImage(systemName: trackInfo.albumIcon)
     }
     
     private func setTrackSlider() {
-        guard let duration = playerService.getDuration() else { return }
+        guard let duration = playerService?.getDuration() else { return }
         trackDurationSlider.minimumValue = 0
         trackDurationSlider.maximumValue = Float(duration)
         setDurationLabels()
-        
     }
     
     private func setDurationLabels() {
@@ -185,13 +169,12 @@ final class PlayerViewController: UIViewController {
     }
     
     //MARK: action funcs
-    
     @objc private func trackDurationSliderValueChanged() {
-        playerService.setSelectTime(timeInterval: TimeInterval(trackDurationSlider.value))
+        playerService?.setSelectTime(timeInterval: TimeInterval(trackDurationSlider.value))
     }
     
     @objc private func trackSliderValue() {
-        guard let time = playerService.getCurrentTime() else { return }
+        guard let time = playerService?.getCurrentTime() else { return }
         trackDurationSlider.value = Float(time)
         setDurationLabels()
     }
@@ -221,9 +204,7 @@ final class PlayerViewController: UIViewController {
     }
 
     @objc private func playPausePlayerButtonTapped() {
-        print("playPausePlayerButtonTapped")
-        playerService.playTrack()
-        trackTimer.fire()
+        playStopMusic()
     }
 
     @objc private func nextPlayerButtonTapped() {
@@ -235,8 +216,26 @@ final class PlayerViewController: UIViewController {
         print("repeatPlayerButtonTapped")
     }
     
-    //MARK: setupLayoutUI
-    private func setupLayoutUI() {
+    //MARK: Private funcs
+    
+    private func playStopMusic() {
+        lazy var trackTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(trackSliderValue), userInfo: nil, repeats: true)
+        
+        guard let playerService = playerService else { return }
+        if !playerService.isPlaying {
+            playPausePlayerButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
+            playerService.isPlaying.toggle()
+            playerService.playTrack()
+            trackTimer.fire()
+        } else {
+            playPausePlayerButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            playerService.isPlaying.toggle()
+            playerService.stopTrack()
+            trackTimer.invalidate()
+        }
+    }
+    
+    private func setupUI() {
         
         view.backgroundColor = .secondarySystemBackground
         

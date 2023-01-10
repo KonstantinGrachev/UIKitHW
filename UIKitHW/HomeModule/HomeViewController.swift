@@ -11,82 +11,72 @@ final class HomeViewController: UIViewController {
     
     enum Constants {
         static let appNameLabelFont: UIFont = .systemFont(ofSize: 20, weight: .bold)
+        static let titleFont: UIFont = .systemFont(ofSize: 30, weight: .heavy)
         
         static let songsStackViewSpacing: CGFloat = 10
-        
         static let appNameLabelHeightAnchor: CGFloat = 20
+        
+        static let backgroundColor: UIColor = .secondarySystemBackground
+        
     }
     
     //MARK: - UI
-    private let appNameLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Plist"
-        label.font = Constants.appNameLabelFont
-        label.textColor = .systemBlue
-        label.textAlignment = .center
-        return label
-    }()
-    
-    private lazy var firstSongView = TrackCellView(trackName: "Wiggle",
-                                                   duration: "2:30",
-                                                   albumIcon: UIImage(systemName: "music.note.list"))
-    
-    private  lazy var secondSongView = TrackCellView(trackName: "Дикий мужчина",
-                                                     duration: "1:34",
-                                                     albumIcon: UIImage(systemName: "music.note.list"))
-    
-    private lazy var songsStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [firstSongView,
-                                                       secondSongView])
+    private lazy var tracksStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: trackViews)
         stackView.axis = .vertical
         stackView.spacing = Constants.songsStackViewSpacing
         return stackView
     }()
     
+    //MARK: Internal properties
+    var viewModel: HomeViewModelProtocol?
+    var trackViews = [TrackCellView]()
+    
     //MARK: - Lifecyclec funcs
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDelegates()
-        setupLayoutUI()
+        configureCells()
+        setupUI()
     }
     
-    //MARK: - setDelegates
-    private func setDelegates() {
-        firstSongView.delegate = self
-        secondSongView.delegate = self
-    }
+    //MARK: Private funcs
     
-    //MARK: - setupLayoutUI
-    private func setupLayoutUI() {
+    private func configureCells() {
+
+        guard let trackInfos = viewModel?.trackInfo else { return }
         
-        view.backgroundColor = .secondarySystemBackground
+        for info in trackInfos {
+            let trackView = TrackCellView()
+            trackView.delegate = self
+            trackView.configure(with: info)
+            trackViews.append(trackView)
+        }
+    }
+
+    private func setupUI() {
+        view.backgroundColor = Constants.backgroundColor
         
-        let subviews = [appNameLabel, songsStackView]
+        let attributes = [NSAttributedString.Key.font: Constants.titleFont]
+        navigationController?.navigationBar.titleTextAttributes = attributes
+        title = viewModel?.title
+        
+        let subviews = [tracksStackView]
         subviews.forEach { subview in
             subview.translatesAutoresizingMaskIntoConstraints = false
             view.addSubview(subview)
         }
         
-        
         NSLayoutConstraint.activate([
-            appNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            appNameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            appNameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            appNameLabel.heightAnchor.constraint(equalToConstant: Constants.appNameLabelHeightAnchor)
-        ])
-        
-        NSLayoutConstraint.activate([
-            songsStackView.topAnchor.constraint(equalTo: appNameLabel.bottomAnchor),
-            songsStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            songsStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tracksStackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tracksStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tracksStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         ])
     }
 }
 
 //MARK: - TrackCellViewDelegate
 extension HomeViewController: TrackCellViewDelegate {
-    func openVCwith(name: String) {
-        let vc = PlayerViewController(trackName: name)
-        present(vc, animated: true)
+    func openVCwith(trackModel: TrackModel) {
+        viewModel?.coordinator.showPlayerScreen(with: trackModel, from: self)
     }
 }

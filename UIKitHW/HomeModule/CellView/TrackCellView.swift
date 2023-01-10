@@ -8,19 +8,22 @@
 import UIKit
 
 protocol TrackCellViewDelegate: AnyObject {
-    func openVCwith(name: String)
+    func openVCwith(trackModel: TrackModel)
 }
 
-class TrackCellView: UIView {
+final class TrackCellView: UIView {
     
     //MARK: Constants
     enum Constants {
         static let albumIconImageViewSize: CGFloat = 60
         static let albumIconImageViewTopBottomAnchor: CGFloat = 5
         static let sideIndentationAnchor: CGFloat = 10
+        static let divisionViewHeightAnchor: CGFloat = 1
         
         static let trackNameLabelFont: UIFont = .systemFont(ofSize: 20, weight: .bold)
         static let durationLabelFont: UIFont = .systemFont(ofSize: 16, weight: .light)
+        
+        static let backgroundColor: UIColor = .clear
     }
     
     //MARK: TrackCellViewDelegate
@@ -57,21 +60,14 @@ class TrackCellView: UIView {
     
     //MARK: Internal properties
     private lazy var tapScreen = UITapGestureRecognizer()
+    private var trackModel: TrackModel?
     
     //MARK: Initialization
     override init(frame: CGRect) {
         super.init(frame: frame)
+        assignGestureRecognizer()
+        setDelegates()
         setupUI()
-        setupLayout()
-    }
-    
-    //FIXME: fix to cunfigurator
-    convenience init(trackName: String, duration: String, albumIcon: UIImage?) {
-        self.init()
-        self.trackNameLabel.text = trackName
-        self.durationLabel.text = duration
-        self.albumIconImageView.image = albumIcon
-        self.tapScreen.delegate = self
     }
     
     @available (*, unavailable)
@@ -79,21 +75,40 @@ class TrackCellView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: Private func
+    //MARK: Internal funcs
+    func configure(with trackInfo: TrackModel) {
+        trackModel = trackInfo
+        trackNameLabel.text = trackInfo.trackName
+        let duration = "\(trackInfo.duration.convertSeconds().0.setZeroForSecond()):\(trackInfo.duration.convertSeconds().1.setZeroForSecond())"
+        durationLabel.text = duration
+        albumIconImageView.image = UIImage(systemName: trackInfo.albumIcon)
+        
+    }
+    
+    //MARK: Private funcs
+    private func setDelegates() {
+        tapScreen.delegate = self
+    }
+    
+    private func assignGestureRecognizer() {
+        addGestureRecognizer(tapScreen)
+    }
+    
     private func setupUI() {
-        backgroundColor = .clear
+        backgroundColor = Constants.backgroundColor
         translatesAutoresizingMaskIntoConstraints = false
         isUserInteractionEnabled = true
         
-        let subviews = [albumIconImageView, trackNameLabel, durationLabel, divisionView]
+        let subviews = [albumIconImageView,
+                        trackNameLabel,
+                        durationLabel,
+                        divisionView]
+        
         subviews.forEach { subview in
             addSubview(subview)
             subview.translatesAutoresizingMaskIntoConstraints = false
         }
-        self.addGestureRecognizer(tapScreen)
-    }
-    
-    private func setupLayout() {
+        
         NSLayoutConstraint.activate([
             albumIconImageView.heightAnchor.constraint(equalToConstant: Constants.albumIconImageViewSize),
             albumIconImageView.widthAnchor.constraint(equalToConstant: Constants.albumIconImageViewSize),
@@ -116,7 +131,7 @@ class TrackCellView: UIView {
             divisionView.leadingAnchor.constraint(equalTo: albumIconImageView.leadingAnchor),
             divisionView.trailingAnchor.constraint(equalTo: durationLabel.trailingAnchor),
             divisionView.bottomAnchor.constraint(equalTo: bottomAnchor),
-            divisionView.heightAnchor.constraint(equalToConstant: 1)
+            divisionView.heightAnchor.constraint(equalToConstant: Constants.divisionViewHeightAnchor)
         ])
     }
 }
@@ -125,8 +140,8 @@ class TrackCellView: UIView {
 extension TrackCellView: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         guard let delegate = delegate,
-              let trackName = trackNameLabel.text else { return false }
-        delegate.openVCwith(name: trackName)
+              let trackModel = trackModel else { return false }
+        delegate.openVCwith(trackModel: trackModel)
         return true
     }
 }
