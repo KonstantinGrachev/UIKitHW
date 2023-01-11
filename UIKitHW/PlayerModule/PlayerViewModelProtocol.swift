@@ -8,6 +8,6 @@
 import Foundation
 
 protocol PlayerViewModelProtocol {
-    var trackModel: TrackModel { get }
+    var trackModel: TrackModel { get set }
     var playerService: PlayerService { get }
 }

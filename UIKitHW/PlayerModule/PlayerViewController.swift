@@ -21,6 +21,15 @@ final class PlayerViewController: UIViewController {
         static let albumImageViewBorderWidth: CGFloat = 1
     }
     
+    //MARK: enums
+    enum TrackSelectButtonType {
+        case next, previous
+    }
+    
+    enum PlayerStateType {
+        case play, pause
+    }
+    
     //MARK: UI
     private let topScreenAlbumFromSubheaderLabel: CustomPlayerScreenLabel = {
         let label = CustomPlayerScreenLabel()
@@ -213,16 +222,20 @@ final class PlayerViewController: UIViewController {
     }
 
     @objc private func previousPlayerButtonTapped() {
-        print("previousPlayerButtonTapped")
+        manageTrack(type: .previous)
     }
 
     @objc private func playPausePlayerButtonTapped() {
-        playStopMusic()
+        guard let playerService = playerService else { return }
+        if !playerService.isPlaying {
+            playStopMusic(with: .play)
+        } else {
+            playStopMusic(with: .pause)
+        }
     }
 
     @objc private func nextPlayerButtonTapped() {
-        print("nextPlayerButtonTapped")
-        
+        manageTrack(type: .next)
     }
     
     @objc private func repeatPlayerButtonTapped() {
@@ -231,21 +244,63 @@ final class PlayerViewController: UIViewController {
     
     //MARK: Private funcs
     
-    private func playStopMusic() {
+    private func playStopMusic(with type: PlayerStateType) {
+       
         lazy var trackTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(trackSliderValue), userInfo: nil, repeats: true)
-        
         guard let playerService = playerService else { return }
-        if !playerService.isPlaying {
+
+        switch type {
+        case .play:
             playPausePlayerButton.setImage(UIImage(systemName: "pause.fill"), for: .normal)
-            playerService.isPlaying.toggle()
             playerService.playTrack()
             trackTimer.fire()
-        } else {
+            playerService.isPlaying = true
+        case .pause:
             playPausePlayerButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-            playerService.isPlaying.toggle()
             playerService.stopTrack()
             trackTimer.invalidate()
+            playerService.isPlaying = false
         }
+    }
+    
+    private func manageTrack(type: TrackSelectButtonType) {
+        guard let tracklist = playerService?.getAllTracks() else { return }
+        switch type {
+        case .next:
+            for (index, track) in tracklist.enumerated() {
+                var nextIndex = index + 1
+                
+                if viewModel?.trackModel == track, nextIndex < tracklist.count {
+                    setTrack(with: nextIndex, in: tracklist)
+                    return
+                } else {
+                    nextIndex = 0
+                    setTrack(with: nextIndex, in: tracklist)
+                    return
+                }
+            }
+        case .previous:
+            for (index, track) in tracklist.enumerated() {
+                let previousIndex = index
+                
+                if viewModel?.trackModel != track, previousIndex == 0 {
+                    setTrack(with: previousIndex, in: tracklist)
+                    return
+                } else {
+                    let previousIndex = tracklist.count - 1
+                    setTrack(with: previousIndex, in: tracklist)
+                    return
+                }
+            }
+        }
+    }
+    
+    private func setTrack(with index: Int, in tracklist: [TrackModel]) {
+        viewModel?.trackModel = tracklist[index]
+        playerService?.trackModel = tracklist[index]
+        playerService?.setPlayer()
+        configureUIfromViewModel()
+        playStopMusic(with: .play)
     }
     
     private func setupUI() {
