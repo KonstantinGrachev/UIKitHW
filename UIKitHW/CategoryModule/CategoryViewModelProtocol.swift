@@ -8,5 +8,8 @@
 import Foundation
 
 protocol CategoryViewModelProtocol {
-    
+    var coordinator: AppCoordinator? { get set }
+    var dataManager: MockNetworkManager? { get set }
+    var products: [ProductModel] { get set }
+    var category: ProductType { get set }
 }

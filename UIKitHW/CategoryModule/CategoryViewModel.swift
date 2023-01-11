@@ -8,9 +8,15 @@
 import Foundation
 
 class CategoryViewModel {
+    var coordinator: AppCoordinator?
+    var dataManager: MockNetworkManager?
+    var category: ProductType
+    var products: [ProductModel]
     
+    init(category: ProductType, products: [ProductModel]) {
+        self.category = category
+        self.products = products
+    }
 }
 
-extension CategoryViewModel: CategoryViewModelProtocol {
-    
-}
+extension CategoryViewModel: CategoryViewModelProtocol {}

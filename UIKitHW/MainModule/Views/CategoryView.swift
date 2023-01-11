@@ -8,7 +8,7 @@
 import UIKit
 
 protocol CategoryViewDelegate: AnyObject {
-    func openVCwith(name: String)
+    func openVCwith(typeOfProduct: ProductType)
 }
 
 final class CategoryView: UIView {
@@ -44,6 +44,7 @@ final class CategoryView: UIView {
     
     //MARK: Internal properties
     private lazy var tapScreen = UITapGestureRecognizer()
+    private var productType: ProductType?
     
     //MARK: Initialization
     override init(frame: CGRect) {
@@ -58,8 +59,9 @@ final class CategoryView: UIView {
     }
     
     //MARK: Internal func
-    func configure(with categoryName: String, _ categoryIcon: UIImage?) {
-        categoryNameLabel.text = categoryName
+    func configure(with productType: ProductType, _ categoryIcon: UIImage?) {
+        self.productType = productType
+        categoryNameLabel.text = productType.rawValue
         categoryIconImageView.image = categoryIcon
     }
     
@@ -98,8 +100,8 @@ final class CategoryView: UIView {
 extension CategoryView: UIGestureRecognizerDelegate {
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         guard let delegate = delegate,
-              let categoryName = categoryNameLabel.text else { return false }
-        delegate.openVCwith(name: categoryName)
+              let productType = productType else { return false }
+        delegate.openVCwith(typeOfProduct: productType)
         return true
     }
 }

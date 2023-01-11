@@ -9,20 +9,21 @@ import Foundation
 
 final class MainViewModel {
     var dataManager: MockNetworkManager?
+    var coordinator: AppCoordinator?
 }
 
 //MARK: - CategoriesViewModelProtocol
 
 extension MainViewModel: MainViewModelProtocol {
-    func openCategoryVC(with name: String) {
-       
+    var productTypes: [ProductType] {
+        ProductType.allCases
     }
     
+    func openCategoryVC(with productType: ProductType) {
+        coordinator?.showCategory(with: productType)
+    }
+  
     var title: String? {
         dataManager?.getCategoriesTitle()
-    }
-    
-    var namesCategories: [String]? {
-        dataManager?.getCategoriesNames()
     }
 }

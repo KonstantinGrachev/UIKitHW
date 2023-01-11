@@ -18,8 +18,17 @@ class AppCoordinator: Coordinator {
     
     func start() {
         let vc = MainViewController()
-        vc.coordinator = self
         vc.viewModel = MainViewModel()
+        vc.viewModel?.coordinator = self
+        vc.viewModel?.dataManager = dataManager
+        navigationController.pushViewController(vc, animated: true)
+    }
+    
+    func showCategory(with productType: ProductType) {
+        let vc = CategoryViewController()
+        vc.viewModel?.coordinator = self
+        let products = dataManager.getFullProducts(of: productType)
+        vc.viewModel = CategoryViewModel(category: productType, products: products)
         vc.viewModel?.dataManager = dataManager
         navigationController.pushViewController(vc, animated: true)
     }

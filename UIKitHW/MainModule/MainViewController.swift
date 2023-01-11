@@ -14,6 +14,7 @@ final class MainViewController: UIViewController {
         static let basicLeadingAnchor: CGFloat = 30
         static let basicTrailingAnchor: CGFloat = -30
         static let categoriesStackViewTopAnchor: CGFloat = 15
+        static let categoriesStackViewSpacing: CGFloat = 10
         
         static let titleLabelFont: UIFont = .systemFont(ofSize: 36, weight: .bold)
         
@@ -22,7 +23,6 @@ final class MainViewController: UIViewController {
     
     //MARK: internal properties
     var viewModel: MainViewModelProtocol?
-    var coordinator: AppCoordinator?
     
     //MARK: UI
     private lazy var titleLabel: UILabel = {
@@ -32,25 +32,12 @@ final class MainViewController: UIViewController {
         return label
     }()
     
-    private let firstCategory: CategoryView = {
-        let view = CategoryView()
-        return view
-    }()
-    
-    private let secondCategory: CategoryView = {
-        let view = CategoryView()
-        return view
-    }()
-    
-    private let thirdCategory: CategoryView = {
-        let view = CategoryView()
-        return view
-    }()
+    private var categoryViews = [CategoryView]()
     
     private lazy var categoriesStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [firstCategory, secondCategory, thirdCategory])
+        let stackView = UIStackView(arrangedSubviews: categoryViews)
         stackView.axis = .vertical
-        stackView.spacing = 10
+        stackView.spacing = Constants.categoriesStackViewSpacing
         stackView.distribution = .fillEqually
         return stackView
     }()
@@ -59,22 +46,19 @@ final class MainViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCategoryViews()
-        setDelegates()
         setupUI()
-    }
-    
-    private func setDelegates() {
-        firstCategory.delegate = self
-        secondCategory.delegate = self
-        thirdCategory.delegate = self
     }
     
     //MARK: setupUI
     private func configureCategoryViews() {
-        guard let names = viewModel?.namesCategories else { return }
-        firstCategory.configure(with: names[0], UIImage(systemName: "folder.fill"))
-        secondCategory.configure(with: names[1], UIImage(systemName: "folder.fill"))
-        thirdCategory.configure(with: names[2], UIImage(systemName: "folder.fill"))
+        guard let productTypes = viewModel?.productTypes else { return }
+        for productType in productTypes {
+            let categoryView = CategoryView()
+            categoryView.delegate = self
+            categoryView.configure(with: productType,
+                                   UIImage(systemName: "folder.fill"))
+            categoryViews.append(categoryView)
+        }
     }
     
     private func setupUI() {
@@ -101,8 +85,7 @@ final class MainViewController: UIViewController {
 
 //MARK: - CategoryViewDelegate
 extension MainViewController: CategoryViewDelegate {
-    func openVCwith(name: String) {
-        let vc = CategoryViewController(title: name)
-        navigationController?.pushViewController(vc, animated: true)
+    func openVCwith(typeOfProduct: ProductType) {
+        viewModel?.coordinator?.showCategory(with: typeOfProduct)
     }
 }
