@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoryViewController: UIViewController {
+final class CategoryViewController: UIViewController {
     
     //MARK: Constants
     enum Constants {
@@ -48,7 +48,8 @@ class CategoryViewController: UIViewController {
     }
     
     @objc private func buyButtonTapped() {
-        print("buyButtonTapped")
+        guard let product = viewModel?.products[segmentedControl.selectedSegmentIndex] else { return }
+        viewModel?.coordinator?.showCart(with: product)
     }
     
     //MARK: Private funcs

@@ -9,6 +9,11 @@ import Foundation
 
 class CartViewModel {
     var coordinator: AppCoordinator?
+    var product: ProductModel
+    
+    init(product: ProductModel) {
+        self.product = product
+    }
 }
 
 extension CartViewModel: CartViewModelProtocol {}

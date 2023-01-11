@@ -7,7 +7,7 @@
 
 import Foundation
 
-class CategoryViewModel {
+final class CategoryViewModel {
     var coordinator: AppCoordinator?
     var dataManager: MockNetworkManager?
     var category: ProductType

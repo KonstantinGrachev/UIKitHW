@@ -9,4 +9,5 @@ import Foundation
 
 protocol CartViewModelProtocol {
     var coordinator: AppCoordinator? { get set }
+    var product: ProductModel { get set }
 }
