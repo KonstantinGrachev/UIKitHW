@@ -206,11 +206,11 @@ final class PlayerViewController: UIViewController {
     }
 
     @objc private func shareActivityButtonTapped() {
-        print("shareActivityButtonTapped")
+       showActivityController()
     }
 
     @objc private func addToPlaylistButtonTapped() {
-        print("addToPlaylistButtonTapped")
+        showAlert()
     }
 
     @objc private func infoDescriptionButtonTapped() {
@@ -243,6 +243,20 @@ final class PlayerViewController: UIViewController {
     }
     
     //MARK: Private funcs
+    private func showAlert() {
+        let alert = UIAlertController(title: "Success",
+                                      message: "Track successfully added to favorites",
+                                      preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(ok)
+        present(alert, animated: true)
+    }
+    private func showActivityController() {
+        guard let item = viewModel?.trackModel.trackName else { return }
+        let items = [item]
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(ac, animated: true)
+    }
     
     private func playStopMusic(with type: PlayerStateType) {
        
