@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+//
 extension Int {
     func setZeroForSecond() -> String {
         return (Double(self) / 10.0 < 1 ? "0\(self)" : "\(self)")
